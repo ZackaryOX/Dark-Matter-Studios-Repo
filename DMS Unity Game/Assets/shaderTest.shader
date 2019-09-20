@@ -33,9 +33,17 @@ Shader "Unlit/shaderTest"
 	//v2f vertex to fragment function sending it to screen
 
 	//Bring in shader lab values
+<<<<<<< Updated upstream
 	float4 _Color;
 	sampler2D _MainTexture;
 
+=======
+	sampler2D _MainTexture;
+
+	//Use uniforms to edit values outside of shader (eg scripts)
+	uniform float4 _Color;
+
+>>>>>>> Stashed changes
 
 	//build object
 	v2f vertexFunction(appdata IN) {
