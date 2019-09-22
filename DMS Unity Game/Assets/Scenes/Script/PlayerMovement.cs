@@ -41,6 +41,6 @@ public class PlayerMovement : MonoBehaviour
         
         GetComponent<Rigidbody>().velocity = moveDirection * moveSpeed;
         moveDirection = new Vector3(0, 0, 0);
-        player.transform.position = new Vector3(player.position.x, 2.5f, player.position.z);
+        player.transform.position = new Vector3(player.position.x, 3.0f, player.position.z);
     }
 }
