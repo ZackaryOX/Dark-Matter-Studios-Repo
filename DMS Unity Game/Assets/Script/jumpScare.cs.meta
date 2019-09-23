@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5b7baa5a7babce442b59c2d83ca61914
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - lookingAt: {instanceID: 0}
+  - flashLight: {instanceID: 0}
+  - audio: {instanceID: 0}
+  - ghostmaterial: {fileID: 2100000, guid: 9150514891260f24998d7f87214238ad, type: 2}
+  - TVshader: {fileID: 4800000, guid: 06abfb93a84482649a80d3bd02388dbc, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
