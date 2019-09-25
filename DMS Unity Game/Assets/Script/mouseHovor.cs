@@ -7,7 +7,7 @@ public class mouseHovor : MonoBehaviour
     Vector4 defaultColor;
     Vector4 newColor;
     bool mouseOver = false;
-    bool switchBool = false;
+   // bool switchBool = false;
     public GameObject lookingAt;
     void Awake()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody player;
-    public float moveSpeed = 5;
+    public float moveSpeed = 100.0f;
     private Vector3 moveDirection;
     public bool CanMove = true;
 
@@ -43,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             GetComponent<Rigidbody>().velocity = moveDirection * moveSpeed;
+            //GetComponent<Rigidbody>().AddForce(moveDirection * moveSpeed);
             moveDirection = new Vector3(0, 0, 0);
             player.transform.position = new Vector3(player.position.x, 3.0f, player.position.z);
         }
