@@ -6,16 +6,22 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     Player test;
+    public GameObject head;
 
     void Start()
     {
-        test = new Player(gameObject);
+        test = new Player(gameObject, head);
     }
 
     void Update()
     {
-        test.Update();
 
+
+    }
+
+    void LateUpdate()
+    {
+        test.Update();
     }
 
 }

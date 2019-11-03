@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerInput
 {
     private CharacterController _controller;
+    private Transform _Headtransform;
     private Transform _transform;
     private Animator _animator;
     //Constructor 
-    public PlayerInput(GameObject thisobject)
+    public PlayerInput(GameObject thisobject, GameObject tempHead)
     {
         _controller = thisobject.GetComponent<CharacterController>();
+        _Headtransform = tempHead.GetComponent<Transform>();
         _transform = thisobject.GetComponent<Transform>();
         _animator = thisobject.GetComponent<Animator>();
         Cursor.visible = false;
@@ -45,17 +47,35 @@ public class PlayerInput
     private Vector3 AdjustedGravityForce = new Vector3(0, -9.8f, 0);
 
     //For Camera
-    public float speedH = 2.0f;
-    public float speedV = 2.0f;
+    private float speedH = 4.0f;
+    private float speedV = 4.0f;
+    private float MaxPitch = 45.0f;
+    private float MaxYaw = 90.0f;
     private float yaw = 0.0f;
     private float pitch = 0.0f;
 
     Vector3 RotateCamera()
     {
-        yaw += speedH * Input.GetAxis("Mouse X");
-        pitch -= speedV * Input.GetAxis("Mouse Y");
+        yaw = 0;
+        float _InputX = Input.GetAxis("Mouse X");
+        float ForYaw = 0;
+        ForYaw += _InputX > 0 && yaw + _InputX < MaxYaw ? _InputX : 0.0f;
+        ForYaw += _InputX < 0 && yaw - _InputX > -MaxYaw ? _InputX : 0.0f;
 
-        return new Vector3(pitch, yaw, 0.0f);
+        float _InputY = Input.GetAxis("Mouse Y");
+        float ForPitch = 0;
+        ForPitch += _InputY > 0 && pitch + _InputY > -MaxPitch ? _InputY : 0.0f;
+        ForPitch += _InputY < 0 && pitch + _InputY < MaxPitch ? _InputY : 0.0f;
+
+
+        yaw += speedH * ForYaw;
+        yaw = yaw > MaxYaw ? MaxYaw : yaw;
+        yaw = yaw < -MaxYaw ? -MaxYaw : yaw;
+        pitch -= speedV * ForPitch;
+        pitch = pitch >= MaxPitch ? MaxPitch : pitch;
+        pitch = pitch <= -MaxPitch ? -MaxPitch : pitch;
+
+        return new Vector3(pitch, yaw + _transform.eulerAngles.y, 0.0f);
     }
 
     private void ComputeJump()
@@ -119,9 +139,18 @@ public class PlayerInput
     }
     private float GradualMovement(int rootaxisval, float max, float min, float cur, float startinc, float stopinc)
     {
-
-
-
+        if ((rootaxisval > 0 && cur < 0) || (rootaxisval < 0 && cur > 0))
+        {
+            if (cur > 0.0f)
+            {
+                return min / stopinc;
+            }
+            else if (cur < 0.0f)
+            {
+                return max / stopinc;
+            }
+        }
+        //Start slowing down
         if ((rootaxisval == 0.0f) && (cur != 0.0f))
         {
             if (cur > 0.0f)
@@ -134,7 +163,7 @@ public class PlayerInput
             }
             return 0.0f;
         }
-
+        //Start Speeding up
         if ((cur > min) && (cur < max))
         {
             return rootaxisval / startinc;
@@ -159,27 +188,18 @@ public class PlayerInput
         Horizontal -= GetInput(KeyCode.A);
 
 
-
         ComputeJump();
 
 
-        Vector3 MouseRotation = _transform.eulerAngles = RotateCamera();
-
+        Vector3 MouseRotation = _Headtransform.eulerAngles = RotateCamera();
+        _transform.eulerAngles = new Vector3(0, MouseRotation.y, 0);
 
         HorizontalVelocity += GradualMovement(Horizontal, MaxVelocity, MinVelocity, HorizontalVelocity, StartIncrement, StopIncrement);
         VerticalVelocity += GradualMovement(Vertical, MaxVelocity, MinVelocity, VerticalVelocity, StartIncrement, StopIncrement);
+        // Debug.Log("AFTER" + VerticalVelocity);
 
-
-        if (Vertical != 0 && Horizontal != 0)
-        {
-            CurrentSpeed = Speed / 2;
-
-        }
-        else
-        {
-            CurrentSpeed = Speed;
-        }
-
+        //Reduces diagonal speed if A/D + W/S are pressed together
+        CurrentSpeed = Vertical != 0 && Horizontal != 0 ? Speed / 2 : Speed;
 
         HorizontalVelocity = CheckVelocity(HorizontalVelocity);
         VerticalVelocity = CheckVelocity(VerticalVelocity);
@@ -187,14 +207,15 @@ public class PlayerInput
         if (HorizontalVelocity != 0 || VerticalVelocity != 0)
         {
             _animator.SetBool("IsWalking", true);
+
         }
         else
         {
             _animator.SetBool("IsWalking", false);
         }
 
-        Vector3 VerticalMovement = _transform.forward * VerticalVelocity;
-        Vector3 HorizontalMovement = _transform.right * HorizontalVelocity;
+        Vector3 VerticalMovement = _Headtransform.forward * VerticalVelocity;
+        Vector3 HorizontalMovement = _Headtransform.right * HorizontalVelocity;
 
 
 

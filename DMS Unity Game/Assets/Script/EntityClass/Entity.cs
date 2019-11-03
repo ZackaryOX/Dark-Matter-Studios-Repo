@@ -10,6 +10,9 @@ public class Entity
     {
         this.ThisObject = thisobject;
         this.Trans = thisobject.transform;
+        Objects++;
+        this.ID = Objects - 1;
+
     }
     //Public
     public int GetID()
@@ -51,7 +54,7 @@ public class Entity
 
     //Private
     private GameObject ThisObject;
-    private int ID;
+    private int ID = 0;
     private Transform Trans;
 
 }

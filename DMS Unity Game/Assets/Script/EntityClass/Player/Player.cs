@@ -5,9 +5,11 @@ using UnityEngine;
 public class Player : Entity
 {
     //Constructor
-    public Player(GameObject thisobject) : base(thisobject)
+    public Player(GameObject thisobject, GameObject temphead) : base(thisobject)
     {
-        ThisInput = new PlayerInput(thisobject);
+        Head = temphead;
+        ThisInput = new PlayerInput(thisobject, temphead);
+
     }
 
 
@@ -20,4 +22,5 @@ public class Player : Entity
     //Private
     private PlayerInput ThisInput;
     private Inventory ThisInventory;
+    private GameObject Head;
 }
