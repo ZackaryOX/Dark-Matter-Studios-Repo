@@ -21,7 +21,7 @@ public class Player : Entity
         Health = 100;
         Sanity = 100;
         AllPlayers.Add(PlayerNumber, this);
-        this.SetPosition(GameObject.Find("Spawn0"/* + PlayerNumber.ToString()*/).transform.position);
+
     }
 
 
@@ -56,6 +56,7 @@ public class Player : Entity
     {
         ThisInput.Update(ThisStamina, Mystate);
         TutorialScore = Timer.ElapsedTime;
+
 
 
         foreach(KeyValuePair<int, PlayerObserver> entry in Observers)

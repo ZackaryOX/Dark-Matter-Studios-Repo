@@ -9,24 +9,24 @@ public class Inventory
     //Constructor:
     public Inventory(Image Slot, Image Selected, Image emptyIcon)
     {
-        ////Set defaut images
-        //noItemIcon = emptyIcon;
-        //notSelectedIcon = Slot;
-        //selectedIcon = Selected;
-        ////Create hotbar
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    //Create null item list
-        //    Items.Add(null);
-        //    //Create background slots
-        //    Slots.Add(GameObject.Instantiate(Slot, Slot.transform.parent));
-        //    Slots[i].transform.localPosition = new Vector3(-500 + 110 * i, -450, 0);
-        //    //Create item slots
-        //    ItemIcons.Add(GameObject.Instantiate(emptyIcon, emptyIcon.transform.parent));
-        //    ItemIcons[i].transform.localPosition = new Vector3(-500 + 110 * i, -450, 0);
-        //}
-        ////Set selected slot to "Selected" sprite
-        //Slots[selected].GetComponent<Image>().sprite = selectedIcon.sprite;
+        //Set defaut images
+        noItemIcon = emptyIcon;
+        notSelectedIcon = Slot;
+        selectedIcon = Selected;
+        //Create hotbar
+        for (int i = 0; i < 10; i++)
+        {
+            //Create null item list
+            Items.Add(null);
+            //Create background slots
+            Slots.Add(GameObject.Instantiate(Slot, Slot.transform.parent));
+            Slots[i].transform.localPosition = new Vector3(-500 + 110 * i, -450, 0);
+            //Create item slots
+            ItemIcons.Add(GameObject.Instantiate(emptyIcon, emptyIcon.transform.parent));
+            ItemIcons[i].transform.localPosition = new Vector3(-500 + 110 * i, -450, 0);
+        }
+        //Set selected slot to "Selected" sprite
+        Slots[selected].GetComponent<Image>().sprite = selectedIcon.sprite;
     }
 
     //Public:
