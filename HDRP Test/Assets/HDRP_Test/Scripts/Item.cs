@@ -16,6 +16,7 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ThisItem.SetCanBePicked(true);
         if (GetComponent<mouseHovor>().mouseOver == true && Input.GetKeyDown(KeyCode.E))
         {
             //Debug.Log(ThisItem.GetPosition());

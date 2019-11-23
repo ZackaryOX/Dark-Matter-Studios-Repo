@@ -7,7 +7,7 @@ public class Player : Entity
     public static Dictionary<int, Player> AllPlayers = new Dictionary<int, Player>();
     static int Players = 0;
     //Constructor
-    public Player(GameObject thisobject, GameObject temphead, Inventory tempinv) : base(thisobject)
+    public Player(GameObject thisobject, GameObject temphead, Inventory tempinv, bool isEditor) : base(thisobject)
     {
         Head = temphead;
         
@@ -16,12 +16,16 @@ public class Player : Entity
         ThisInventory = tempinv;
         Name = "Player" + Players.ToString();
         thisobject.name = Name;
-        PlayerNumber = Players;
-        Players++;
+        
         Health = 100;
         Sanity = 100;
-        AllPlayers.Add(PlayerNumber, this);
 
+        if (!isEditor)
+        {
+            PlayerNumber = Players;
+            Players++;
+            AllPlayers.Add(PlayerNumber, this);
+        }
     }
 
 
@@ -66,8 +70,11 @@ public class Player : Entity
     }
 
     public void AddItemToInventory(string pickupname) {
-        if(Mystate.GetPickup())
-        this.ThisInventory.PickupItem(PickUp.AllItems[pickupname]);
+        if (Mystate.GetPickup())
+        {
+            Debug.Log("picking up" + this.ThisInventory.PickupItem(PickUp.AllItems[pickupname]));
+            
+        }
     }
     public bool UseItemInInventory(PickUp tempitem)
     {

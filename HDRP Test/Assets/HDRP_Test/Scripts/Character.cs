@@ -25,6 +25,7 @@ public class Character : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();
         PlayerAwake();
+        Application.targetFrameRate = 60;
     }
 
     void Update()
@@ -34,13 +35,9 @@ public class Character : MonoBehaviour
 
     void LateUpdate()
     {
-        if (PV.IsMine)
+        if (PV.IsMine )
         {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                
-                PV.RPC("SetPosition", RpcTarget.AllBuffered);
-            }
+
             Player1.Update();
             hotbar.Update();
             MyCamera.SetActive(true);
@@ -58,11 +55,11 @@ public class Character : MonoBehaviour
     void PlayerAwake()
     {
         hotbar = new Inventory(defaultIcon, selectedIcon, emptyItem);
-        Player1 = new Player(gameObject, head, hotbar);
+        Player1 = new Player(gameObject, head, hotbar, false);
         Player1Stats = new StatObserver(Player1);
         Player1Score = new ScoreObserver(Player1);
-        Player1.SetState(new TeachWalkState());
-        
+       /*FOR TUTORIAL:*/ //Player1.SetState(new TeachWalkState());
+       /*FOR EDITING:*/  Player1.SetState(new TeachPickupState());
     }
     [PunRPC]
     void SetPosition()

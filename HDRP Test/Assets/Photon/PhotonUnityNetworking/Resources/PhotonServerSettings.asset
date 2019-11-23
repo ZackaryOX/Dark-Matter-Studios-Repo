@@ -41,5 +41,8 @@ MonoBehaviour:
   - SetPosition
   - IncrPlayers
   - UpdateDrawer
+  - DrawerInteract
+  - DoorInteract
+  - DoorUnlock
   DisableAutoOpenWizard: 1
   ShowSettings: 1
