@@ -12314,6 +12314,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Keyobject: {fileID: 1835194921899544589}
+  locked: 0
+  musicEventName: event:/Test
 --- !u!23 &1333393287
 MeshRenderer:
   m_ObjectHideFlags: 0

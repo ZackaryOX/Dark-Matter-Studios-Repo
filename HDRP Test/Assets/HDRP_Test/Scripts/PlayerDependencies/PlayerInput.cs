@@ -39,6 +39,7 @@ public class PlayerInput
     private bool IsJumping = false;
     private bool Adjusted = false;
     private int Jump = 0;
+    private float StaminaDeduction = 10.0f;
 
     public float JumpMult = 2.5f;
     public float lowJumpMult = 2f;
@@ -47,8 +48,8 @@ public class PlayerInput
     private Vector3 AdjustedGravityForce = new Vector3(0, -9.8f, 0);
 
     //For Camera
-    private float speedH = 4.0f;
-    private float speedV = 4.0f;
+    private float speedH = 180.0f;
+    private float speedV = 200.0f;
     private float MaxPitch = 65.0f;
     private float MaxYaw = 90.0f;
     private float yaw = 0.0f;
@@ -68,17 +69,17 @@ public class PlayerInput
         ForPitch += _InputY < 0 && pitch + _InputY < MaxPitch ? _InputY : 0.0f;
 
 
-        yaw += speedH * ForYaw;
+        yaw += speedH * ForYaw * Time.deltaTime;
         yaw = yaw > MaxYaw ? MaxYaw : yaw;
         yaw = yaw < -MaxYaw ? -MaxYaw : yaw;
-        pitch -= speedV * ForPitch;
+        pitch -= speedV * ForPitch * Time.deltaTime;
         pitch = pitch >= MaxPitch ? MaxPitch : pitch;
         pitch = pitch <= -MaxPitch ? -MaxPitch : pitch;
 
         return new Vector3(pitch, yaw + _transform.eulerAngles.y, 0.0f);
     }
 
-    private void ComputeJump()
+    private void ComputeJump(Stamina playerstamina)
     {
         int TempJump = 0;
         //End of jump
@@ -108,14 +109,18 @@ public class PlayerInput
         {
 
             TempJump += GetInput(KeyCode.Space);
+
+            //Was SpaceBar Pressed? If so initiate jump
+            if (TempJump > 0 && playerstamina.GetStamina() >= StaminaDeduction)
+            {
+                IsJumping = true;
+                YVelocity += (AdjustedGravityForce.y * -1) + JumpVelocity;
+                float NewStamina = playerstamina.GetStamina() - StaminaDeduction;
+                playerstamina.SetStamina(NewStamina);
+            }
         }
 
-        //Was SpaceBar Pressed? If so initiate jump
-        if (TempJump > 0)
-        {
-            IsJumping = true;
-            YVelocity += (AdjustedGravityForce.y * -1) + JumpVelocity;
-        }
+
 
 
 
@@ -195,7 +200,7 @@ public class PlayerInput
         Running += GetInput(KeyCode.LeftShift);
 
         if(currentstate.GetJump())
-        ComputeJump();
+        ComputeJump(playerstam);
 
 
         Vector3 MouseRotation = _Headtransform.eulerAngles = RotateCamera();
@@ -209,9 +214,9 @@ public class PlayerInput
         CurrentSpeed = Vertical != 0 && Horizontal != 0 ? Speed / 2 : Speed;
 
 
-        CurrentSpeed = Running > 0 ? CurrentSpeed * playerstam.DecreaseStam(Time.deltaTime) : CurrentSpeed;
+        CurrentSpeed = (Running > 0) && IsJumping == false ? CurrentSpeed * playerstam.DecreaseStam(Time.deltaTime) : CurrentSpeed;
 
-        if(Running == 0)
+        if(Running == 0 && !IsJumping)
         playerstam.IncreaseStam(Time.deltaTime, Mathf.Abs(Vertical) + Mathf.Abs(Horizontal));
 
 
