@@ -9,7 +9,8 @@ public class GameSetup : MonoBehaviour
     // Start is called before the first frame update
     public void Awake()
     {
-        if(GameSetup.GS == null)
+
+        if (GameSetup.GS == null)
         {
             GameSetup.GS = this;
         }

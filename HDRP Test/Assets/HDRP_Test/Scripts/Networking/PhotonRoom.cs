@@ -19,7 +19,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public int PlayersInRoom;
     public int myNumberInRoom;
 
-    public int playerInGame;
+    public static int playersInGame = 0;
 
     //Delayed Start
     private bool readyToCount;
@@ -39,12 +39,13 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         {
             if (PhotonRoom.room != this)
             {
+                Debug.Log("NOT THE RIGHT ROOM");
                 Destroy(PhotonRoom.room.gameObject);
                 PhotonRoom.room = this;
             }
 
         }
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
     }
 
     public override void OnEnable()
@@ -183,15 +184,19 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             }
             else
             {
+                //RPC_CreatePlayer();
+
                 RPC_CreatePlayer();
+                //PV.RPC("RPC_CreatePlayer", RpcTarget.AllBuffered);
+                
             }
         }
     }
     [PunRPC]
     private void RPC_LoadedGameScene()
     {
-        playerInGame++;
-        if(playerInGame == PhotonNetwork.PlayerList.Length)
+        
+        if(playersInGame == PhotonNetwork.PlayerList.Length)
         {
             PV.RPC("RPC_CreatePlayer", RpcTarget.All);
         }
@@ -199,7 +204,16 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     [PunRPC]
     private void RPC_CreatePlayer()
     {
-        Transform temptrans = GameObject.Find("Spawn0").transform;
-        PhotonNetwork.Instantiate(Path.Combine("Prefabs", "PlayerPrefab"), temptrans.position, temptrans.rotation, 0);
+        //Debug.Log("SERVER PLAYER NUMBER: " + PhotonRoom.playersInGame);
+        
+        GameObject tempobj = GameObject.Find("Spawn" + PhotonNetwork.CountOfPlayersInRooms);
+
+        
+        PhotonNetwork.Instantiate(Path.Combine("Prefabs", "PlayerPrefab"), tempobj.transform.position, tempobj.transform.rotation, 0);
+
+        PlayersInRoom++;
+        
+
     }
+
 }

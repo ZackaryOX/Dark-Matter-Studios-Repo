@@ -58,11 +58,11 @@ public class PlayerInput
     {
         yaw = 0;
         //float _InputX = Input.GetAxis("Mouse X");
-        float ForYaw = Input.GetAxis("Mouse X");
+        float ForYaw = InputManager.GetMouseX();
         //ForYaw += _InputX > 0 && yaw + _InputX < MaxYaw ? _InputX : 0.0f;
         //ForYaw += _InputX < 0 && yaw - _InputX > -MaxYaw ? _InputX : 0.0f;
 
-        float _InputY = Input.GetAxis("Mouse Y");
+        float _InputY = InputManager.GetMouseY();
         float ForPitch = 0;
         ForPitch += _InputY > 0 && pitch + _InputY > -MaxPitch ? _InputY : 0.0f;
         ForPitch += _InputY < 0 && pitch + _InputY < MaxPitch ? _InputY : 0.0f;
@@ -107,7 +107,7 @@ public class PlayerInput
         if (_controller.isGrounded && !IsJumping)
         {
 
-            TempJump += GetInput(KeyCode.Space);
+            TempJump += GetInput("jump");
         }
 
         //Was SpaceBar Pressed? If so initiate jump
@@ -120,9 +120,9 @@ public class PlayerInput
 
 
     }
-    private int GetInput(KeyCode val)
+    private int GetInput(string temp)
     {
-        if (Input.GetKey(val))
+        if (InputManager.GetKey(temp))
         {
             return 1;
         }
@@ -185,14 +185,14 @@ public class PlayerInput
 
         if (currentstate.GetWalk())
         {
-            Vertical += GetInput(KeyCode.W);
-            Vertical -= GetInput(KeyCode.S);
-            Horizontal += GetInput(KeyCode.D);
-            Horizontal -= GetInput(KeyCode.A);
+            Vertical += GetInput("forward");
+            Vertical -= GetInput("backward");
+            Horizontal += GetInput("right");
+            Horizontal -= GetInput("left");
         }
 
         if(currentstate.GetRun())
-        Running += GetInput(KeyCode.LeftShift);
+        Running += GetInput("run");
 
         if(currentstate.GetJump())
         ComputeJump();

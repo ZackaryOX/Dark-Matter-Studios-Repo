@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2445584682871754873}
   - component: {fileID: 2445584682871754872}
   m_Layer: 0
-  m_Name: PlayerPrefab
+  m_Name: PlayerPrefab3
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

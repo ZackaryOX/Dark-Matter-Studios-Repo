@@ -7,7 +7,7 @@ public class Player : Entity
     public static Dictionary<int, Player> AllPlayers = new Dictionary<int, Player>();
     static int Players = 0;
     //Constructor
-    public Player(GameObject thisobject, GameObject temphead, Inventory tempinv) : base(thisobject)
+    public Player(GameObject thisobject, GameObject temphead, PlayerInventory tempinv) : base(thisobject)
     {
         Head = temphead;
         
@@ -21,7 +21,7 @@ public class Player : Entity
         Health = 100;
         Sanity = 100;
         AllPlayers.Add(PlayerNumber, this);
-        this.SetPosition(GameObject.Find("Spawn0"/* + PlayerNumber.ToString()*/).transform.position);
+
     }
 
 
@@ -56,6 +56,7 @@ public class Player : Entity
     {
         ThisInput.Update(ThisStamina, Mystate);
         TutorialScore = Timer.ElapsedTime;
+
 
 
         foreach(KeyValuePair<int, PlayerObserver> entry in Observers)
@@ -99,7 +100,7 @@ public class Player : Entity
     PlayerState Mystate;
     private float TutorialScore = 0;
     private PlayerInput ThisInput;
-    private Inventory ThisInventory;
+    private PlayerInventory ThisInventory;
     private GameObject Head;
     private int PlayerNumber;
     private Stamina ThisStamina;

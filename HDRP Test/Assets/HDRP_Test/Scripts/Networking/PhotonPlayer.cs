@@ -12,13 +12,13 @@ public class PhotonPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerview = GetComponent<PhotonView>();
-        int spawnPicker = Random.Range(0, GameSetup.GS.spawnpoints.Length);
-        Transform MySpawn = GameSetup.GS.spawnpoints[spawnPicker];
-        if (playerview.IsMine)
-        {
-            myAvatar = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "PlayerPrefab"), MySpawn.position,MySpawn.rotation, 0);
-        }
+        //playerview = GetComponent<PhotonView>();
+        //int spawnPicker = Random.Range(0, GameSetup.GS.spawnpoints.Length);
+        //Transform MySpawn = GameSetup.GS.spawnpoints[spawnPicker];
+        //if (playerview.IsMine)
+        //{
+        //    myAvatar = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "PlayerPrefab"), MySpawn.position,MySpawn.rotation, 0);
+        //}
     }
 
     // Update is called once per frame

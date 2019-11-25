@@ -38,7 +38,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
     public void OnRoundStart()
     {
-        Debug.Log("WE CLICKIN");
+
         RoundStart.SetActive(false);
         RoundCancel.SetActive(true);
         PhotonNetwork.JoinRoom(roomname);
@@ -53,6 +53,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
     {
         Debug.Log("Room created");
         PhotonNetwork.CreateRoom(roomname, roomOps);
+        
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
