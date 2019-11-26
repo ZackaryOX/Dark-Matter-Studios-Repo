@@ -36,6 +36,7 @@ public class ForDoor : MonoBehaviour
 
 
         ThisKey = PickUp.AllItems[Keyobject.name];
+        
         ThisDoor.SetKey(ThisKey);
         DoorView = GetComponent<PhotonView>();
     }
@@ -65,18 +66,22 @@ public class ForDoor : MonoBehaviour
     [PunRPC]
     void DoorInteract()
     {
-        ThisDoor.Interact();
-        if (ThisDoor.GetIsOpened() == false)
+        if (ThisDoor.GetIsLocked() == false && ThisDoor.IsSlerping == false)
         {
-            CurrentState = 0;
-        }
-        else
-        {
-            CurrentState = 1;
-        }
+            ThisDoor.Interact();
+            if (ThisDoor.GetIsOpened() == false)
+            {
+                CurrentState = 0;
+            }
+            else
+            {
+                CurrentState = 1;
+            }
 
-        musiceventinstance.setParameterByName("State", CurrentState);
-        musiceventinstance.start();
+            musiceventinstance.setParameterByName("State", CurrentState);
+            musiceventinstance.start();
+        }
+        
     }
 
     [PunRPC]

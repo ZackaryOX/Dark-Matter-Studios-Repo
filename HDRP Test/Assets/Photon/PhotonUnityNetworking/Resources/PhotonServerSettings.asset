@@ -44,5 +44,6 @@ MonoBehaviour:
   - DrawerInteract
   - DoorInteract
   - DoorUnlock
+  - AwakePickup
   DisableAutoOpenWizard: 1
   ShowSettings: 1

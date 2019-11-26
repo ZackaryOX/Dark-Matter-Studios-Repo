@@ -97,7 +97,7 @@ public class Door : Interactable
 
     private bool Locked = false;
     private bool Open = false;
-    private bool IsSlerping = false;
+    public bool IsSlerping = false;
     private PickUp MyKey;
 
     Quaternion ClosedQuat;

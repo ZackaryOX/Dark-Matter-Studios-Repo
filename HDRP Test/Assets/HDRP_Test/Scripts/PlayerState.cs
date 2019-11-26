@@ -4,10 +4,12 @@ using UnityEngine;
 
 abstract public class PlayerState
 {
+    protected bool CanLook = false;
     protected bool CanWalk = false;
     protected bool CanRun = false;
     protected bool CanJump = false;
     protected bool CanPickup = false;
+    
 
 
     public bool GetWalk()
@@ -22,6 +24,10 @@ abstract public class PlayerState
     {
         return CanJump;
     }
+    public bool GetLook()
+    {
+        return CanLook;
+    }
     public bool GetPickup()
     {
         return CanPickup;
@@ -34,11 +40,31 @@ abstract public class PlayerState
 }
 
 
-public class TeachWalkState : PlayerState
+public class PausedState : PlayerState
+{
+    public PausedState()
+    {
+        CanLook = false;
+        CanWalk = true;
+        CanRun = false;
+        CanJump = false;
+        CanPickup = false;
+    }
+
+    public override void Advance(Player tempplayer)
+    {
+        //NOT SET UP YET
+    }
+
+}
+
+
+    public class TeachWalkState : PlayerState
 {
 
     public TeachWalkState()
     {
+        CanLook = true;
         CanWalk = true;
         CanRun = false;
         CanJump = false;
@@ -56,6 +82,7 @@ public class TeachRunState : PlayerState
 
     public TeachRunState()
     {
+        CanLook = true;
         CanWalk = true;
         CanRun = true;
         CanJump = false;
@@ -73,6 +100,7 @@ public class TeachJumpState : PlayerState
 
     public TeachJumpState()
     {
+        CanLook = true;
         CanWalk = true;
         CanRun = true;
         CanJump = true;
@@ -90,6 +118,7 @@ public class TeachPickupState : PlayerState
 
     public TeachPickupState()
     {
+        CanLook = true;
         CanWalk = true;
         CanRun = true;
         CanJump = true;   

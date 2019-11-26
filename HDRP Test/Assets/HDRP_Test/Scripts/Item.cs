@@ -10,7 +10,9 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
         ThisItem = new PickUp(gameObject, ItemImage);
+
     }
 
     // Update is called once per frame

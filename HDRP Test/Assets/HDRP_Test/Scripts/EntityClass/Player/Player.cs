@@ -30,6 +30,10 @@ public class Player : Entity
 
 
     //Public
+    public PlayerState GetState()
+    {
+        return Mystate;
+    }
     public float GetHealth()
     {
         return Health;
@@ -68,7 +72,7 @@ public class Player : Entity
             entry.Value.Update();
         }
     }
-
+    
     public void AddItemToInventory(string pickupname) {
         if (Mystate.GetPickup())
         {

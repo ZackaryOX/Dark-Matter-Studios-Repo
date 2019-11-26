@@ -3748,7 +3748,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   ObservedComponents:
   - {fileID: 8372355801034187318}
-  viewIdField: 4
+  viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &8372355801034187318
@@ -4771,6 +4771,9 @@ MonoBehaviour:
   StaminaBar: {fileID: 214179669509764186}
   HealthBar: {fileID: 214179668904760019}
   SanityBar: {fileID: 214179668558495890}
+  AudioMenu: {fileID: 0}
+  SFXEventNames: []
+  MusicEventNames: []
 --- !u!143 &214179669988466981
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4822,7 +4825,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 214179669988466978}
   - {fileID: 214179669988466977}
-  viewIdField: 3
+  viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &214179669988466978

@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.00.00">
 	<object class="Event" id="{d9f20e6f-56b4-45b9-8452-9989ea115191}">
 		<property name="name">
-			<value>Test</value>
+			<value>Door</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
 		</property>
 		<relationship name="folder">
-			<destination>{95e7964d-9778-4147-af62-8430dfa535bf}</destination>
+			<destination>{b720ae1e-005a-4e11-be02-a10301cfea66}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{12d249bd-6df4-4c49-ab42-0d5412fd6096}</destination>
@@ -55,7 +55,7 @@
 			<destination>{a1bf9b7c-94a6-4ef2-8eba-55c73a2bb292}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{3227d9b6-a37e-470d-82e1-ac0e57f7403f}</destination>
+			<destination>{3989a24d-d109-420c-b247-81b4431584dc}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{3f338d50-75a7-4e10-97a5-a04b49a9e417}" />
@@ -258,6 +258,7 @@
 		<relationship name="effects">
 			<destination>{adf9f6cc-ee0a-4886-a83e-5a524e2c2c6b}</destination>
 			<destination>{2cc82cd9-102e-49d8-86bf-fc6ac0ccbc4c}</destination>
+			<destination>{5c0b45d7-3ac3-443b-86d4-bc8c751886f1}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{34aec23f-ba3e-4075-b906-d13a45b91072}" />
@@ -298,6 +299,17 @@
 	</object>
 	<object class="MixerBusFader" id="{adf9f6cc-ee0a-4886-a83e-5a524e2c2c6b}" />
 	<object class="SpatialiserEffect" id="{2cc82cd9-102e-49d8-86bf-fc6ac0ccbc4c}" />
+	<object class="MixerSend" id="{5c0b45d7-3ac3-443b-86d4-bc8c751886f1}">
+		<property name="level">
+			<value>-11</value>
+		</property>
+		<property name="inputFormat">
+			<value>2</value>
+		</property>
+		<relationship name="mixerReturn">
+			<destination>{e2aa5afc-ab26-4699-9237-f53dbe2231a4}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{0402a735-6afa-498b-976c-329e8b9ea68c}" />
 	<object class="MixerBusFader" id="{f812797f-f242-482b-a6bc-3f5de1038fcd}" />
 </objects>
