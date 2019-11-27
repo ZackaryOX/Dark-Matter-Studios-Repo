@@ -6,33 +6,35 @@ using UnityEngine;
 public class ForDrawer : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject DrawerObj;
+    public GameObject OutterDrawer;
     Drawer ThisDrawer;
-    PhotonView MasterView;
+    PhotonView DrawerView;
     void Awake()
     {
-       
-        ThisDrawer = new Drawer(gameObject, DrawerObj);
+        Debug.Log("creating drawer");
+        ThisDrawer = new Drawer(OutterDrawer, gameObject);
     }
     private void Start()
     {
-        
+        DrawerView = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(MasterView)
-        MasterView.RPC("UpdateDrawer", RpcTarget.All);
-        else
+
+        if (Input.GetKeyDown(KeyCode.E) && GetComponent<mouseHovor>().mouseOver == true)
         {
-            MasterView = Player.AllPlayers[0].GetObject().GetComponent<PhotonView>();
+            DrawerView.RPC("DrawerInteract", RpcTarget.AllBuffered, null);
         }
+        ThisDrawer.Update();
     }
 
     [PunRPC]
-    void UpdateDrawer()
+    public void DrawerInteract()
     {
-        ThisDrawer.Update();
+
+        ThisDrawer.Interact();
+
     }
 }
