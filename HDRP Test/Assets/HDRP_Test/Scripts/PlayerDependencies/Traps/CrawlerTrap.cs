@@ -62,14 +62,14 @@ public class CrawlerTrap : Trap
     }
     public void Update()
     {
+
         if (CreateCrawler)
         {
             IsLerping = true;
             CurrentCrawler = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Chupa"),
                 StartPoint, Quaternion.Euler(StartRotation)); //MonoBehaviour.Instantiate(CrawlerPrefab);
             CurrentCrawler.transform.position = StartPoint;
-            CurrentCrawler.transform.eulerAngles = StartRotation;
-            //shaderAnim();
+            CurrentCrawler.transform.eulerAngles = StartRotation;  
             CreateCrawler = false;
         }
 
@@ -89,16 +89,6 @@ public class CrawlerTrap : Trap
         }
     }
 
-    //IEnumerator shaderAnim()
-    //{
-    //    CrawlerPrefab.GetComponent<Material>().SetFloat("_Amount", 0.0f);
-    //    for (float t = 0; t <= 1; t += Time.deltaTime)
-    //    {
-    //        yield return null; // wait 1 frame
-    //        CrawlerPrefab.GetComponent<Material>().SetFloat("_Amount", t);
-    //    }
-    //    CrawlerPrefab.GetComponent<Material>().SetFloat("_Amount", 1.0f);
-    //}
 
     //PRIVATE:
     private GameObject StartObject;

@@ -4,7 +4,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Vector1ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"_Soft\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"f0d04004-4d4e-45c6-a517-462e084259e1\"\n    },\n    \"m_DefaultReferenceName\": \"Vector1_A2DCEC75\",\n    \"m_OverrideReferenceName\": \"_Soft\",\n    \"m_Precision\": 0,\n    \"m_Value\": 0.5,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    },\n    \"m_Hidden\": false\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"_Soft\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"f0d04004-4d4e-45c6-a517-462e084259e1\"\n    },\n    \"m_DefaultReferenceName\": \"Vector1_A2DCEC75\",\n    \"m_OverrideReferenceName\": \"_Soft\",\n    \"m_Precision\": 0,\n    \"m_Value\": 0.6000000238418579,\n    \"m_FloatType\": 0,\n    \"m_RangeValues\": {\n        \"x\": 0.0,\n        \"y\": 1.0\n    },\n    \"m_Hidden\": false\n}"
         }
     ],
     "m_SerializableNodes": [
@@ -30,7 +30,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Texture2DAssetNode"
             },
-            "JSONnodeData": "{\n    \"m_GuidSerialized\": \"285b96b4-fbd0-41fd-892e-5af7cc29b5f0\",\n    \"m_GroupGuidSerialized\": \"00000000-0000-0000-0000-000000000000\",\n    \"m_Name\": \"Texture 2D Asset\",\n    \"m_DrawState\": {\n        \"m_Expanded\": true,\n        \"m_Position\": {\n            \"serializedVersion\": \"2\",\n            \"x\": -444.0,\n            \"y\": -640.0,\n            \"width\": 151.0,\n            \"height\": 104.00000762939453\n        }\n    },\n    \"m_SerializableSlots\": [\n        {\n            \"typeInfo\": {\n                \"fullName\": \"UnityEditor.ShaderGraph.Texture2DMaterialSlot\"\n            },\n            \"JSONnodeData\": \"{\\n    \\\"m_Id\\\": 0,\\n    \\\"m_DisplayName\\\": \\\"Out\\\",\\n    \\\"m_SlotType\\\": 1,\\n    \\\"m_Priority\\\": 2147483647,\\n    \\\"m_Hidden\\\": false,\\n    \\\"m_ShaderOutputName\\\": \\\"Out\\\",\\n    \\\"m_StageCapability\\\": 3\\n}\"\n        }\n    ],\n    \"m_Precision\": 0,\n    \"m_PreviewExpanded\": true,\n    \"m_CustomColors\": {\n        \"m_SerializableColors\": []\n    },\n    \"m_Texture\": {\n        \"m_SerializedTexture\": \"{\\\"texture\\\":{\\\"fileID\\\":8400000,\\\"guid\\\":\\\"ca9e0ecdda7441a41846adc3897b480c\\\",\\\"type\\\":2}}\",\n        \"m_Guid\": \"\"\n    }\n}"
+            "JSONnodeData": "{\n    \"m_GuidSerialized\": \"285b96b4-fbd0-41fd-892e-5af7cc29b5f0\",\n    \"m_GroupGuidSerialized\": \"00000000-0000-0000-0000-000000000000\",\n    \"m_Name\": \"Texture 2D Asset\",\n    \"m_DrawState\": {\n        \"m_Expanded\": true,\n        \"m_Position\": {\n            \"serializedVersion\": \"2\",\n            \"x\": -444.0,\n            \"y\": -640.0,\n            \"width\": 151.0,\n            \"height\": 104.00000762939453\n        }\n    },\n    \"m_SerializableSlots\": [\n        {\n            \"typeInfo\": {\n                \"fullName\": \"UnityEditor.ShaderGraph.Texture2DMaterialSlot\"\n            },\n            \"JSONnodeData\": \"{\\n    \\\"m_Id\\\": 0,\\n    \\\"m_DisplayName\\\": \\\"Out\\\",\\n    \\\"m_SlotType\\\": 1,\\n    \\\"m_Priority\\\": 2147483647,\\n    \\\"m_Hidden\\\": false,\\n    \\\"m_ShaderOutputName\\\": \\\"Out\\\",\\n    \\\"m_StageCapability\\\": 3\\n}\"\n        }\n    ],\n    \"m_Precision\": 0,\n    \"m_PreviewExpanded\": true,\n    \"m_CustomColors\": {\n        \"m_SerializableColors\": []\n    },\n    \"m_Texture\": {\n        \"m_SerializedTexture\": \"{\\\"texture\\\":{\\\"fileID\\\":8400000,\\\"guid\\\":\\\"d932249b1b85a0242acc9fdcc4f02ca4\\\",\\\"type\\\":2}}\",\n        \"m_Guid\": \"\"\n    }\n}"
         },
         {
             "typeInfo": {
@@ -232,6 +232,12 @@
                 "fullName": "UnityEditor.Graphing.Edge"
             },
             "JSONnodeData": "{\n    \"m_OutputSlot\": {\n        \"m_SlotId\": 2,\n        \"m_NodeGUIDSerialized\": \"6ecb6c4e-d976-4ea8-af71-1b42da546997\"\n    },\n    \"m_InputSlot\": {\n        \"m_SlotId\": 0,\n        \"m_NodeGUIDSerialized\": \"91f26a35-2c48-4666-8a67-951930b32d4b\"\n    }\n}"
+        },
+        {
+            "typeInfo": {
+                "fullName": "UnityEditor.Graphing.Edge"
+            },
+            "JSONnodeData": "{\n    \"m_OutputSlot\": {\n        \"m_SlotId\": 0,\n        \"m_NodeGUIDSerialized\": \"f215708b-574f-4ac5-9ee9-2a7e26580453\"\n    },\n    \"m_InputSlot\": {\n        \"m_SlotId\": 0,\n        \"m_NodeGUIDSerialized\": \"53124a69-6f13-45d1-811f-a5e45bd3fbd7\"\n    }\n}"
         }
     ],
     "m_PreviewData": {
