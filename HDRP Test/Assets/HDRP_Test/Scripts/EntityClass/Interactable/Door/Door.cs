@@ -21,7 +21,7 @@ public class Door : Interactable
     //Public:
     public void OpenDoor()
     {
-        if(Locked == false && Open == false && IsSlerping == false)
+        if(Locked == false  && IsSlerping == false)
         {
             IsSlerping = true;
 
@@ -34,6 +34,18 @@ public class Door : Interactable
         if(Open == true && IsSlerping == false)
         {
             IsSlerping = true;
+        }
+    }
+
+    public void Interact()
+    {
+        if(Open == false)
+        {
+            OpenDoor();
+        }
+        else if(Open == true)
+        {
+            CloseDoor();
         }
     }
     public void UnlockDoor()
@@ -85,7 +97,7 @@ public class Door : Interactable
 
     private bool Locked = false;
     private bool Open = false;
-    private bool IsSlerping = false;
+    public bool IsSlerping = false;
     private PickUp MyKey;
 
     Quaternion ClosedQuat;

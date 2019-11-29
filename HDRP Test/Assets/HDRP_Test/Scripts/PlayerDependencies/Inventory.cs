@@ -7,7 +7,7 @@ public class Inventory
 {
 
     //Constructor:
-    public Inventory(Image Slot, Image Selected, Image emptyIcon)
+    public Inventory(Image Slot, Image Selected, Image emptyIcon, Text slotNumber)
     {
         //Set defaut images
         noItemIcon = emptyIcon;
@@ -19,6 +19,12 @@ public class Inventory
             //Create background slots
             Slots.Add(GameObject.Instantiate(Slot, Slot.transform.parent));
             Slots[i].transform.localPosition = new Vector3(-500 + 110 * i, -450, 0);
+            Text temp = GameObject.Instantiate(slotNumber, slotNumber.transform.parent);
+            temp.transform.localPosition = new Vector3(-470 + 110 * i, -480, 0);
+            int tempNumber = i + 1;
+            if (tempNumber == 10)
+                tempNumber = 0;
+            temp.text = tempNumber.ToString();
             //Create item slots
             ItemIcons.Add(GameObject.Instantiate(emptyIcon, emptyIcon.transform.parent));
             ItemIcons[i].transform.localPosition = new Vector3(-500 + 110 * i, -450, 0);
@@ -47,38 +53,6 @@ public class Inventory
 
     public void Update()
     {
-        //Scroll up
-        if (InputManager.GetScrollWheel() > 0f)
-        {
-            SelectPrevious();
-        }
-        //Scroll down
-        else if (InputManager.GetScrollWheel() < 0f)
-        {
-            SelectNext();
-        }
-
-        if (InputManager.GetKey("one"))
-            Select(0);
-        else if (InputManager.GetKey("two"))
-            Select(1);
-        else if (InputManager.GetKey("three"))
-            Select(2);
-        else if (InputManager.GetKey("four"))
-            Select(3);
-        else if (InputManager.GetKey("five"))
-            Select(4);
-        else if (InputManager.GetKey("six"))
-            Select(5);
-        else if (InputManager.GetKey("seven"))
-            Select(6);
-        else if (InputManager.GetKey("eight"))
-            Select(7);
-        else if (InputManager.GetKey("nine"))
-            Select(8);
-        else if (InputManager.GetKey("zero"))
-            Select(9);
-
         UpdateSelected();
     }
 
@@ -96,7 +70,7 @@ public class Inventory
 
 public class PlayerInventory : Inventory
 {
-    public PlayerInventory(Image Slot, Image Selected, Image emptyIcon) : base(Slot, Selected, emptyIcon)
+    public PlayerInventory(Image Slot, Image Selected, Image emptyIcon, Text Number) : base(Slot, Selected, emptyIcon, Number)
     {
         for (int i = 0; i < 10; i++)
             Items.Add(null);
@@ -183,7 +157,7 @@ public class PlayerInventory : Inventory
 
 public class GhostInventory : Inventory
 {
-    public GhostInventory(Image Slot, Image Selected, Image emptyIcon) : base(Slot, Selected, emptyIcon)
+    public GhostInventory(Image Slot, Image Selected, Image emptyIcon, Text Number) : base(Slot, Selected, emptyIcon, Number)
     {
         for (int i = 0; i < 10; i++)
             Traps.Add(null);
@@ -232,7 +206,7 @@ public class GhostInventory : Inventory
     }
     public bool PlaceTrap(TrapNode temp)
     {
-        if(Traps[selected] != null)
+        if (Traps[selected] != null)
         {
             //temp.Slot = Traps[selected];
             return true;

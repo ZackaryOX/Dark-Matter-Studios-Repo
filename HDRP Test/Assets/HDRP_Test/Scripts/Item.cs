@@ -10,12 +10,15 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+
         ThisItem = new PickUp(gameObject, ItemImage);
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        ThisItem.SetCanBePicked(true);
         if (GetComponent<mouseHovor>().mouseOver == true && Input.GetKeyDown(KeyCode.E))
         {
             //Debug.Log(ThisItem.GetPosition());

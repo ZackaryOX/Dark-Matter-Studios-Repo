@@ -8,9 +8,14 @@ public class PlayerInput
     private Transform _Headtransform;
     private Transform _transform;
     private Animator _animator;
+    private InputManager input;
+    private float lerpSmoothingTime = 0.05f;
+    private PlayerInventory inventory;
     //Constructor 
-    public PlayerInput(GameObject thisobject, GameObject tempHead)
+    public PlayerInput(GameObject thisobject, GameObject tempHead, InputManager tempInput, PlayerInventory tempInv)
     {
+        inventory = tempInv;
+        input = tempInput;
         _controller = thisobject.GetComponent<CharacterController>();
         _Headtransform = tempHead.GetComponent<Transform>();
         _transform = thisobject.GetComponent<Transform>();
@@ -23,7 +28,7 @@ public class PlayerInput
 
 
     //For Walking
-    private float Speed = 10;
+    private float Speed = 6f;
     private float StartIncrement = 10;
     private float StopIncrement = 5;
     private float VerticalVelocity = 0;
@@ -39,6 +44,7 @@ public class PlayerInput
     private bool IsJumping = false;
     private bool Adjusted = false;
     private int Jump = 0;
+    private float StaminaDeduction = 10.0f;
 
     public float JumpMult = 2.5f;
     public float lowJumpMult = 2f;
@@ -47,38 +53,33 @@ public class PlayerInput
     private Vector3 AdjustedGravityForce = new Vector3(0, -9.8f, 0);
 
     //For Camera
-    private float speedH = 4.0f;
-    private float speedV = 4.0f;
+    private float speedH = 2.0f;
+    private float speedV = 2.0f;
     private float MaxPitch = 65.0f;
     private float MaxYaw = 90.0f;
     private float yaw = 0.0f;
     private float pitch = 0.0f;
+    Quaternion OldRot = Quaternion.Euler(new Vector3(0, 0, 0.0f));
 
-    Vector3 RotateCamera()
+    Vector3 RotateCamera(PlayerState state)
     {
-        yaw = 0;
-        //float _InputX = Input.GetAxis("Mouse X");
-        float ForYaw = InputManager.GetMouseX();
-        //ForYaw += _InputX > 0 && yaw + _InputX < MaxYaw ? _InputX : 0.0f;
-        //ForYaw += _InputX < 0 && yaw - _InputX > -MaxYaw ? _InputX : 0.0f;
 
-        float _InputY = InputManager.GetMouseY();
-        float ForPitch = 0;
-        ForPitch += _InputY > 0 && pitch + _InputY > -MaxPitch ? _InputY : 0.0f;
-        ForPitch += _InputY < 0 && pitch + _InputY < MaxPitch ? _InputY : 0.0f;
+        float ForYaw = state.GetLook() ? input.GetMouseX() : 0;
+        float ForPitch = state.GetLook() ? input.GetMouseY() : 0;
+
 
 
         yaw += speedH * ForYaw;
-        yaw = yaw > MaxYaw ? MaxYaw : yaw;
-        yaw = yaw < -MaxYaw ? -MaxYaw : yaw;
-        pitch -= speedV * ForPitch;
-        pitch = pitch >= MaxPitch ? MaxPitch : pitch;
-        pitch = pitch <= -MaxPitch ? -MaxPitch : pitch;
 
-        return new Vector3(pitch, yaw + _transform.eulerAngles.y, 0.0f);
+        pitch -= speedV * ForPitch;
+
+        pitch = pitch > MaxPitch ? MaxPitch : pitch;
+        pitch = pitch < -MaxPitch ? -MaxPitch : pitch;
+
+        return new Vector3( pitch, yaw, 0.0f);
     }
 
-    private void ComputeJump()
+    private void ComputeJump(Stamina playerstamina)
     {
         int TempJump = 0;
         //End of jump
@@ -108,21 +109,25 @@ public class PlayerInput
         {
 
             TempJump += GetInput("jump");
+
+            //Was SpaceBar Pressed? If so initiate jump
+            if (TempJump > 0 && playerstamina.GetStamina() >= StaminaDeduction)
+            {
+                IsJumping = true;
+                YVelocity += (AdjustedGravityForce.y * -1) + JumpVelocity;
+                float NewStamina = playerstamina.GetStamina() - StaminaDeduction;
+                playerstamina.SetStamina(NewStamina);
+            }
         }
 
-        //Was SpaceBar Pressed? If so initiate jump
-        if (TempJump > 0)
-        {
-            IsJumping = true;
-            YVelocity += (AdjustedGravityForce.y * -1) + JumpVelocity;
-        }
+
 
 
 
     }
     private int GetInput(string temp)
     {
-        if (InputManager.GetKey(temp))
+        if (input.GetKey(temp))
         {
             return 1;
         }
@@ -171,11 +176,47 @@ public class PlayerInput
 
         return 0.0f;
     }
+    private void InventoryInput()
+    {
+        //Scroll up
+        if (input.GetScrollWheel() > 0f)
+        {
+            inventory.SelectPrevious();
+        }
+        //Scroll down
+        else if (input.GetScrollWheel() < 0f)
+        {
+            inventory.SelectNext();
+        }
+
+        if (input.GetKey("one"))
+            inventory.Select(0);
+        else if (input.GetKey("two"))
+            inventory.Select(1);
+        else if (input.GetKey("three"))
+            inventory.Select(2);
+        else if (input.GetKey("four"))
+            inventory.Select(3);
+        else if (input.GetKey("five"))
+            inventory.Select(4);
+        else if (input.GetKey("six"))
+            inventory.Select(5);
+        else if (input.GetKey("seven"))
+            inventory.Select(6);
+        else if (input.GetKey("eight"))
+            inventory.Select(7);
+        else if (input.GetKey("nine"))
+            inventory.Select(8);
+        else if (input.GetKey("zero"))
+            inventory.Select(9);
+    }
 
 
 
     public void Update(Stamina playerstam, PlayerState currentstate)
     {
+        InventoryInput();
+
         int Vertical = 0;
         int Horizontal = 0;
         int Running = 0;
@@ -191,15 +232,29 @@ public class PlayerInput
             Horizontal -= GetInput("left");
         }
 
-        if(currentstate.GetRun())
+        if(currentstate.GetRun() && Vertical > 0)
         Running += GetInput("run");
 
         if(currentstate.GetJump())
-        ComputeJump();
+        ComputeJump(playerstam);
 
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    Debug.Log("HEAD ROT: " + _Headtransform.eulerAngles);
+        //    Debug.Log("BODY ROT: " + _transform.eulerAngles);
+        //    Debug.Log("CAM ROT: " + GameObject.Find("PlayerCamera").transform.eulerAngles);
+        //}
 
-        Vector3 MouseRotation = _Headtransform.eulerAngles = RotateCamera();
-        _transform.eulerAngles = new Vector3(0, MouseRotation.y, 0);
+        Vector3 RawRotation = RotateCamera(currentstate);
+        //_transform.rotation = 
+        //_Headtransform.rotation = 
+        //_transform.Rotate(Vector3.right * RawRotation.x);
+        Quaternion NewRot = Quaternion.Euler(new Vector3(RawRotation.x, RawRotation.y, 0));
+        Quaternion FinalRotation = Quaternion.Lerp(OldRot, NewRot, Time.deltaTime/lerpSmoothingTime);
+
+        _transform.eulerAngles = new Vector3(0,FinalRotation.eulerAngles.y,0);
+        _Headtransform.eulerAngles = new Vector3(FinalRotation.eulerAngles.x, FinalRotation.eulerAngles.y, 0);
+        OldRot = NewRot;
 
         HorizontalVelocity += GradualMovement(Horizontal, MaxVelocity, MinVelocity, HorizontalVelocity, StartIncrement, StopIncrement);
         VerticalVelocity += GradualMovement(Vertical, MaxVelocity, MinVelocity, VerticalVelocity, StartIncrement, StopIncrement);
@@ -209,16 +264,16 @@ public class PlayerInput
         CurrentSpeed = Vertical != 0 && Horizontal != 0 ? Speed / 2 : Speed;
 
 
-        CurrentSpeed = Running > 0 ? CurrentSpeed * playerstam.DecreaseStam(Time.deltaTime) : CurrentSpeed;
+        CurrentSpeed = (Running > 0) && IsJumping == false ? CurrentSpeed * playerstam.DecreaseStam(Time.deltaTime) : CurrentSpeed;
 
-        if(Running == 0)
+        if(Running == 0 && !IsJumping)
         playerstam.IncreaseStam(Time.deltaTime, Mathf.Abs(Vertical) + Mathf.Abs(Horizontal));
 
 
         HorizontalVelocity = CheckVelocity(HorizontalVelocity);
         VerticalVelocity = CheckVelocity(VerticalVelocity);
 
-        if (HorizontalVelocity != 0 || VerticalVelocity != 0)
+        if (Horizontal != 0 || Vertical != 0)
         {
             _animator.SetBool("IsWalking", true);
 

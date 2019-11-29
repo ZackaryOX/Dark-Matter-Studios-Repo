@@ -13,7 +13,7 @@ public class Stamina
         Decrease = decrease;
     }
     //PUBLIC:
-    public void SetStamina(int temp)
+    public void SetStamina(float temp)
     {
         CurrentStam = temp;
     }

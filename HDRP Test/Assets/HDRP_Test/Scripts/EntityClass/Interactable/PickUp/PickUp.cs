@@ -12,8 +12,10 @@ public class PickUp : Interactable
     {
         this.Name = "PickUp" + ID.ToString();
         ThisObject.name = this.Name;
-        AllItems.Add(this.Name, this);
         SetImage(tempimg);
+        SetPicked(false);
+
+        AllItems.Add(this.Name, this);
     }
 
     //Public:

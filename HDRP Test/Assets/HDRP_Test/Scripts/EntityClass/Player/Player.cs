@@ -7,25 +7,33 @@ public class Player : Entity
     public static Dictionary<int, Player> AllPlayers = new Dictionary<int, Player>();
     static int Players = 0;
     //Constructor
-    public Player(GameObject thisobject, GameObject temphead, PlayerInventory tempinv) : base(thisobject)
+    public Player(GameObject thisobject, GameObject temphead, PlayerInventory tempinv, bool isEditor, InputManager tempInput) : base(thisobject)
     {
         Head = temphead;
         
-        ThisInput = new PlayerInput(thisobject, temphead);
+        ThisInput = new PlayerInput(thisobject, temphead, tempInput, tempinv);
         ThisStamina = new Stamina(100, 12.5f, 40.0f);
         ThisInventory = tempinv;
         Name = "Player" + Players.ToString();
         thisobject.name = Name;
-        PlayerNumber = Players;
-        Players++;
+        
         Health = 100;
         Sanity = 100;
-        AllPlayers.Add(PlayerNumber, this);
 
+        if (!isEditor)
+        {
+            PlayerNumber = Players;
+            Players++;
+            AllPlayers.Add(PlayerNumber, this);
+        }
     }
 
 
     //Public
+    public PlayerState GetState()
+    {
+        return Mystate;
+    }
     public float GetHealth()
     {
         return Health;
@@ -64,10 +72,13 @@ public class Player : Entity
             entry.Value.Update();
         }
     }
-
+    
     public void AddItemToInventory(string pickupname) {
-        if(Mystate.GetPickup())
-        this.ThisInventory.PickupItem(PickUp.AllItems[pickupname]);
+        if (Mystate.GetPickup())
+        {
+            Debug.Log("picking up" + this.ThisInventory.PickupItem(PickUp.AllItems[pickupname]));
+            
+        }
     }
     public bool UseItemInInventory(PickUp tempitem)
     {
@@ -92,6 +103,7 @@ public class Player : Entity
     {
         Observers.Remove(temp.GetID());
     }
+
 
     //Private
     private Dictionary<int, PlayerObserver> Observers = new Dictionary<int, PlayerObserver>();
