@@ -62,13 +62,14 @@ public class CrawlerTrap : Trap
     }
     public void Update()
     {
+
         if (CreateCrawler)
         {
             IsLerping = true;
             CurrentCrawler = PhotonNetwork.Instantiate(Path.Combine("Prefabs", "Chupa"),
                 StartPoint, Quaternion.Euler(StartRotation)); //MonoBehaviour.Instantiate(CrawlerPrefab);
             CurrentCrawler.transform.position = StartPoint;
-            CurrentCrawler.transform.eulerAngles = StartRotation;
+            CurrentCrawler.transform.eulerAngles = StartRotation;  
             CreateCrawler = false;
         }
 
@@ -87,6 +88,7 @@ public class CrawlerTrap : Trap
             LerpParam = reset ? 0 : LerpParam;
         }
     }
+
 
     //PRIVATE:
     private GameObject StartObject;

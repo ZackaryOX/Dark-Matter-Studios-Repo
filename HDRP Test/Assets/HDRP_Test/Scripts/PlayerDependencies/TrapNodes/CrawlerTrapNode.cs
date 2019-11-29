@@ -22,8 +22,11 @@ public class CrawlerTrapNode : TrapNode
     {
         if(MyMouse.mouseOver && Input.GetKeyDown(KeyCode.E))
         {
+            
             Slot.Initiate(LerpTime);
         }
         Slot.Update();
     }
+
+ 
 }

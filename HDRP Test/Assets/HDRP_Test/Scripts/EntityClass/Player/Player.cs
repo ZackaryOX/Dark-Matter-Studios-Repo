@@ -7,11 +7,11 @@ public class Player : Entity
     public static Dictionary<int, Player> AllPlayers = new Dictionary<int, Player>();
     static int Players = 0;
     //Constructor
-    public Player(GameObject thisobject, GameObject temphead, Inventory tempinv, bool isEditor) : base(thisobject)
+    public Player(GameObject thisobject, GameObject temphead, PlayerInventory tempinv, bool isEditor, InputManager tempInput) : base(thisobject)
     {
         Head = temphead;
         
-        ThisInput = new PlayerInput(thisobject, temphead);
+        ThisInput = new PlayerInput(thisobject, temphead, tempInput, tempinv);
         ThisStamina = new Stamina(100, 12.5f, 40.0f);
         ThisInventory = tempinv;
         Name = "Player" + Players.ToString();
@@ -104,6 +104,7 @@ public class Player : Entity
         Observers.Remove(temp.GetID());
     }
 
+
     //Private
     private Dictionary<int, PlayerObserver> Observers = new Dictionary<int, PlayerObserver>();
     private float Health;
@@ -111,7 +112,7 @@ public class Player : Entity
     PlayerState Mystate;
     private float TutorialScore = 0;
     private PlayerInput ThisInput;
-    private Inventory ThisInventory;
+    private PlayerInventory ThisInventory;
     private GameObject Head;
     private int PlayerNumber;
     private Stamina ThisStamina;

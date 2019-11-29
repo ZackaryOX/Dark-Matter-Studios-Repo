@@ -69,11 +69,6 @@ public class mouseHovor : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            MovingStuff = false;
-            return;
-        }
 
 
     }
