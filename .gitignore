@@ -63,3 +63,9 @@ crashlytics-build.properties
 
 
 DMS Unity Game/Library/shadercompiler-UnityShaderCompiler.exe4.log
+
+DMS Unity Game/Library/metadata/
+
+DMS Unity Game/Library/ShaderCache/
+
+*.log
