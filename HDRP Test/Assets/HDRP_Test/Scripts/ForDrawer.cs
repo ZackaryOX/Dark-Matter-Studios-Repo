@@ -23,11 +23,19 @@ public class ForDrawer : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.E) && GetComponent<mouseHovor>().mouseOver == true)
-        {
-            DrawerView.RPC("DrawerInteract", RpcTarget.AllBuffered, null);
-        }
+
         ThisDrawer.Update();
+    }
+
+    void OnMouseOver()
+    {
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            ThisDrawer.Interact();
+            //DrawerView.RPC("DrawerInteract", RpcTarget.AllBuffered, null);
+        }
+
     }
 
     [PunRPC]

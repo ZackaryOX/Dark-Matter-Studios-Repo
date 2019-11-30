@@ -1,13 +1,13 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
-using Photon.Pun;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class Character : MonoBehaviour
+public class GhostCharacter : MonoBehaviour
 {
-    Player ThisPlayer;
+    Ghost ThisPlayer;
     private PhotonView PV;
     public GameObject head;
     public GameObject MyCamera;
@@ -18,10 +18,9 @@ public class Character : MonoBehaviour
     public Text SlotNumber;
     public Image StaminaBar;
     public Image HealthBar;
-    public Image SanityBar;
-    PlayerInventory hotbar;
-    StatObserver Player1Stats;
-    ScoreObserver Player1Score;
+    GhostInventory hotbar;
+    GhostStatObserver Player1Stats;
+    GhostScoreObserver Player1Score;
 
     private InputManager input;
     private PausedState PauseMenu;
@@ -51,14 +50,14 @@ public class Character : MonoBehaviour
 
     void Update()
     {
-               
+
     }
 
     void LateUpdate()
     {
-        if (PV.IsMine )
+        if (PV.IsMine)
         {
-            if (input.GetKey("escape"))
+            if (input.GetKeyDown("escape"))
             {
                 if (OldState == null)
                 {
@@ -78,13 +77,11 @@ public class Character : MonoBehaviour
             input.Update();
             MyCamera.SetActive(true);
             MyFBOCam.SetActive(true);
-            Vector3 Data = Player1Stats.GetData();
+            Vector2 Data = Player1Stats.GetData();
             StaminaBar.transform.localScale = new Vector3(Data.y / 100, 1, 1);
             HealthBar.transform.localScale = new Vector3(Data.x / 100, 1, 1);
-            SanityBar.transform.localScale = new Vector3(Data.z / 100, 1, 1);
-            ThisAudioManager.Update(100 - Data.z);
         }
-        
+
     }
 
     public void SetSFXVolume(float temp)
@@ -163,19 +160,20 @@ public class Character : MonoBehaviour
     void PlayerAwake()
     {
         input = new InputManager();
-        hotbar = new PlayerInventory(defaultIcon, selectedIcon, emptyItem, SlotNumber);
+        hotbar = new GhostInventory(defaultIcon, selectedIcon, emptyItem, SlotNumber);
         MyCamera.SetActive(false);
         MyFBOCam.SetActive(false);
-        ThisPlayer = new Player(gameObject, head, hotbar, false, input);
-        Player1Stats = new StatObserver(ThisPlayer);
-        Player1Score = new ScoreObserver(ThisPlayer);
-       /*FOR TUTORIAL:*/ //Player1.SetState(new TeachWalkState());
-       /*FOR EDITING:*/  ThisPlayer.SetState(new TeachPickupState());
+        ThisPlayer = new Ghost(gameObject, head, hotbar, false, input);
+        Player1Stats = new GhostStatObserver(ThisPlayer);
+        Player1Score = new GhostScoreObserver(ThisPlayer);
+        /*FOR TUTORIAL:*///ThisPlayer.SetState(new TeachWalkState());
+        /*FOR EDITING:*/ThisPlayer.SetState(new TeachPickupState());
+
     }
     [PunRPC]
     void SetPosition()
     {
-        Debug.Log("THIS IS HOW MANY PLAYERS: " + Player.AllPlayers.Count+  " FROM PLAYER " + ThisPlayer.GetName());
+        Debug.Log("THIS IS HOW MANY PLAYERS: " + Player.AllPlayers.Count + " FROM PLAYER " + ThisPlayer.GetName());
         //Player1.SetPosition(GameObject.Find("Spawn0").transform.position);
     }
 }
