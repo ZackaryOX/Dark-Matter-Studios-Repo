@@ -45,7 +45,7 @@ public class Character : MonoBehaviour
         PauseMenu = new PausedState();
         PV = GetComponent<PhotonView>();
         PlayerAwake();
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 144;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
     }
 

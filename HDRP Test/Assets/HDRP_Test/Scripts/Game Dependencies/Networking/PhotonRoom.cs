@@ -206,10 +206,20 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
         //Debug.Log("SERVER PLAYER NUMBER: " + PhotonRoom.playersInGame);
         
-        GameObject tempobj = GameObject.Find("Spawn" + PhotonNetwork.CountOfPlayersInRooms);
 
-        
-        PhotonNetwork.Instantiate(Path.Combine("Prefabs", "PlayerPrefab"), tempobj.transform.position, tempobj.transform.rotation, 0);
+        if(PhotonNetwork.CountOfPlayersInRooms == 0)
+        {
+            GameObject tempobj = GameObject.Find("Spawn0");
+
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "PlayerPrefab"), tempobj.transform.position, tempobj.transform.rotation, 0);
+        }
+        else
+        {
+            GameObject tempobj = GameObject.Find("Spawn1");
+
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "GhostPrefab"), tempobj.transform.position, tempobj.transform.rotation, 0);
+        }
+       
 
         PlayersInRoom++;
         

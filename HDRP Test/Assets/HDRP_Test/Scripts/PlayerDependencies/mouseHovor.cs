@@ -9,7 +9,7 @@ public class mouseHovor : MonoBehaviour
     public Material NewMat;
     public GameObject Object;
     public GameObject lookingAt;
-    private Vector3 origRotation;
+
 
     MeshRenderer Rend;
     Material OldMat;
@@ -24,76 +24,40 @@ public class mouseHovor : MonoBehaviour
         //ObjectMoving = this.gameObject;
         Rend = GetComponent<MeshRenderer>();
         OldMat = Rend.material;
+        Object = gameObject;
     }
 
-    float ReturnGridPos(float x)
-    {
-        float gridtolockto = 0.25f;
-
-        float posToSet = x;
-
-        if (posToSet > 0)
-        {
-            posToSet /= gridtolockto;
-            posToSet += 0.5f;
-            float roundedX = (int)posToSet;
-            roundedX *= gridtolockto;
-            posToSet = roundedX;
-        }
-        else if (posToSet < 0)
-        {
-            posToSet /= gridtolockto;
-            posToSet -= 0.5f;
-            float roundedX = (int)posToSet;
-            roundedX *= gridtolockto;
-            posToSet = roundedX;
-        }
-
-        return posToSet;
-    }
+   
 
     void Update()
     {
         lookingAt = GameObject.Find(rayFromCamera.lookingAt);
+
+        if (Object == lookingAt)
+        {
+            mouseOver = true;
+        }
+        else
+        {
+            mouseOver = false;
+            if (!MovingStuff)
+            {
+                Rend.material = OldMat;
+            }
+        }
 
 
         if (mouseOver && !MovingStuff)
         {
 
             Rend.material = NewMat;
-            if (Input.GetKey(KeyCode.E))
-            {
-                //MovingStuff = true;
-                //ObjectMoving = lookingAt;
 
-            }
         }
 
 
 
-    }
-
-    void OnMouseOver()
-    {
-        lookingAt = GameObject.Find(rayFromCamera.lookingAt);
-        mouseOver = true;
-
-
 
     }
 
-
-
-    void OnMouseExit()
-    {
-
-        mouseOver = false;
-        if (!MovingStuff)
-        {
-            Rend.material = OldMat;
-        }
-
-
-    }
 
 }
