@@ -7,7 +7,7 @@ public class Player : Entity
     public static Dictionary<int, Player> AllPlayers = new Dictionary<int, Player>();
     static int Players = 0;
     //Constructor
-    public Player(GameObject thisobject, GameObject temphead, PlayerInventory tempinv, bool isEditor, InputManager tempInput) : base(thisobject)
+    public Player(GameObject thisobject, GameObject temphead, PlayerInventory tempinv, bool isEditor, InputManager tempInput, GameObject handtarget) : base(thisobject)
     {
         Head = temphead;
 
@@ -16,7 +16,8 @@ public class Player : Entity
         ThisInventory = tempinv;
         Name = "Player" + Players.ToString();
         thisobject.name = Name;
-        
+        SetDefaultHandTarget(handtarget);
+        SetHandTarget(handtarget);
         Health = 100;
         Sanity = 100;
 
@@ -62,7 +63,7 @@ public class Player : Entity
     }
     public override void Update()
     {
-        ThisInput.Update(ThisStamina, Mystate);
+        ThisInput.Update(ThisStamina, Mystate, CurrentHandTarget);
         TutorialScore = Timer.ElapsedTime;
 
 
@@ -123,11 +124,21 @@ public class Player : Entity
     {
         return ThisInput.GetDefaultSpeed();
     }
+    public void SetHandTarget(GameObject newhand)
+    {
+        CurrentHandTarget = DefaultHandTarget;
+    }
+    public void SetDefaultHandTarget(GameObject newhand)
+    {
+        DefaultHandTarget = newhand;
+    }
     //Private
     private Dictionary<int, PlayerObserver> Observers = new Dictionary<int, PlayerObserver>();
     private float Health;
     private float Sanity;
     PlayerState Mystate;
+    private GameObject DefaultHandTarget;
+    private GameObject CurrentHandTarget;
     private float TutorialScore = 0;
     private PlayerInput ThisInput;
     private PlayerInventory ThisInventory;

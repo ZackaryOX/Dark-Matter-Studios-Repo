@@ -5160,6 +5160,7 @@ MonoBehaviour:
   StaminaBar: {fileID: 6330855405078858645}
   HealthBar: {fileID: 6214271290173514717}
   SanityBar: {fileID: 788195911883744436}
+  HandTarget: {fileID: 0}
   menu: {fileID: 2553237555526647736}
   settings: {fileID: 5285719169845043438}
   audiosettings: {fileID: 5876572556364444969}

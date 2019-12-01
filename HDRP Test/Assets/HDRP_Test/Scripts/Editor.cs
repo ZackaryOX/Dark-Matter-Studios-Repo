@@ -22,13 +22,18 @@ public class Editor : MonoBehaviour
 
     int layerMask = 1 << 8;
 
+    public GameObject HandTarget;
     private InputManager input;
     private PausedState PauseMenu;
     private PlayerState OldState;
     public AudioManager ThisAudioManager;
     public GameObject TestBox;
     public GameObject UIElements;
-    
+    float weight = 0;
+    float x = 27;
+    float y = -50;
+    float z = -160;
+    Animator ThisAnim;
 
     [FMODUnity.EventRef]
     public string[] SFXEventNames;
@@ -42,6 +47,7 @@ public class Editor : MonoBehaviour
         PlayerAwake();
         Application.targetFrameRate = 144;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
+        ThisAnim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -54,10 +60,63 @@ public class Editor : MonoBehaviour
 
     }
 
+    void OnAnimatorIK()
+    {
+
+        Vector3 worldpos = new Vector3(0.25f, 0, 1);
+
+        Vector2 mousePos = Input.mousePosition;
+        worldpos.x = mousePos.x;
+        worldpos.y = mousePos.y;
+        Vector3 newVec = Camera.main.ScreenToWorldPoint(worldpos);
+
+        ThisAnim.SetIKPosition(AvatarIKGoal.RightHand, newVec);
+        ThisAnim.SetIKPositionWeight(AvatarIKGoal.RightHand, weight);
+        
+        ThisAnim.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.Euler(new Vector3(x,y, z) + ThisPlayer.GetRotationEuler()));
+        ThisAnim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+    }
+
     void LateUpdate()
     {
 
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            weight += 1 * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            weight -= 1 * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.Y))
+        {
+            x += 1 ;
+        }
+        if (Input.GetKey(KeyCode.U))
+        {
+            y += 1;
+        }
+        if (Input.GetKey(KeyCode.I))
+        {
+            z += 1;
+        }
 
+        if (Input.GetKey(KeyCode.H))
+        {
+            x -= 1;
+        }
+        if (Input.GetKey(KeyCode.J))
+        {
+            y -= 1;
+        }
+        if (Input.GetKey(KeyCode.K))
+        {
+            z -= 1;
+        }
+        if (Input.GetKey(KeyCode.P))
+        {
+            Debug.Log(new Vector3(x,y,z));
+        }
         ThisPlayer.Update();
         hotbar.Update();
         MyCamera.SetActive(true);
@@ -98,7 +157,7 @@ public class Editor : MonoBehaviour
         layerMask = ~layerMask;
         input = new InputManager();
         hotbar = new PlayerInventory(defaultIcon, selectedIcon, emptyItem, SlotNumber);
-        ThisPlayer = new Player(gameObject, head, hotbar, true, input);
+        ThisPlayer = new Player(gameObject, head, hotbar, false, input, HandTarget);
         Player1Stats = new StatObserver(ThisPlayer);
         Player1Score = new ScoreObserver(ThisPlayer);
         /*FOR TUTORIAL:*/ //Player1.SetState(new TeachWalkState());

@@ -226,8 +226,9 @@ public class PlayerInput
 
 
 
-    public void Update(Stamina playerstam, PlayerState currentstate)
+    public void Update(Stamina playerstam, PlayerState currentstate, GameObject Handlocation)
     {
+        
         InventoryInput();
 
         int Vertical = 0;

@@ -28,6 +28,7 @@ public class Character : MonoBehaviour
     private PlayerState OldState;
     public AudioManager ThisAudioManager;
 
+    public GameObject HandTarget;
     public GameObject menu;
     public GameObject settings;
     public GameObject audiosettings;
@@ -171,7 +172,7 @@ public class Character : MonoBehaviour
         hotbar = new PlayerInventory(defaultIcon, selectedIcon, emptyItem, SlotNumber);
         MyCamera.SetActive(false);
         MyFBOCam.SetActive(false);
-        ThisPlayer = new Player(gameObject, head, hotbar, false, input);
+        ThisPlayer = new Player(gameObject, head, hotbar, false, input, HandTarget);
         Player1Stats = new StatObserver(ThisPlayer);
         Player1Score = new ScoreObserver(ThisPlayer);
        /*FOR TUTORIAL:*/ //Player1.SetState(new TeachWalkState());

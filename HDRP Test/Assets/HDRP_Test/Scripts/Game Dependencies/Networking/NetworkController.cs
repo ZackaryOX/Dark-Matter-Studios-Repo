@@ -76,7 +76,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            OnRoundStart();
+           // OnRoundStart();
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
