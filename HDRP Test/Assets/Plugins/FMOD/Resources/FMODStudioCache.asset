@@ -72,6 +72,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-7161520875340726358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Door/State
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-6915817497041095947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,6 +159,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-5657045409817299583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SanityMusic/Sanity
+  m_EditorClassIdentifier: 
+  Name: Sanity
+  Min: 0
+  Max: 100
+  Default: 0
+  Exists: 1
 --- !u!114 &-4706163184352719448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,12 +242,12 @@ MonoBehaviour:
   Path: event:/SFX/Door
   guid: 6f0ef2d9b456b94584529989ea115191
   Banks:
-  - {fileID: -6250885216335037167}
+  - {fileID: 2478149221679156172}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 9145603207188682081}
+  - {fileID: -7161520875340726358}
   MinDistance: 1
   MaxDistance: 20
   Length: 3500
@@ -446,16 +480,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 8093926214555539286}
-  - {fileID: -6250885216335037167}
+  - {fileID: 2478149221679156172}
   EditorEvents:
   - {fileID: -2993041141096622188}
   - {fileID: 9200518973089521287}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -6250885216335037167}
+  - {fileID: 2478149221679156172}
   StringsBanks:
   - {fileID: 8093926214555539286}
-  stringsBankWriteTime: 637107420685271349
+  stringsBankWriteTime: 637104750320000000
   cacheVersion: 3
 --- !u!114 &203675441762407728
 MonoBehaviour:
@@ -578,6 +612,24 @@ MonoBehaviour:
   Max: 100
   Default: 0
   Exists: 0
+--- !u!114 &2478149221679156172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/Test/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637104750320000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &3423418059592764055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,7 +943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD/Test/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637107420685271349
+  lastModified: 637104750320000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -998,12 +1050,12 @@ MonoBehaviour:
   Path: event:/Music/SanityMusic
   guid: 0d656d8ecc79614883b2bcbad81b971e
   Banks:
-  - {fileID: -6250885216335037167}
+  - {fileID: 2478149221679156172}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 8212524425413693936}
+  - {fileID: -5657045409817299583}
   MinDistance: 0
   MaxDistance: 0
   Length: 51000

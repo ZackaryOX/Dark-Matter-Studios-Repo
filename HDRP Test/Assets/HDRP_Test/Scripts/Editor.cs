@@ -40,7 +40,7 @@ public class Editor : MonoBehaviour
     {
         PauseMenu = new PausedState();
         PlayerAwake();
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 144;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
     }
 

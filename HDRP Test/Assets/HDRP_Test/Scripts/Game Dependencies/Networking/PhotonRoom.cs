@@ -180,7 +180,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             IsGameLoaded = true;
             if (MultiplayerSettings.multiplayerSettings.delaystart)
             {
-                PV.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
+                //PV.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
+                RPC_CreatePlayer();
             }
             else
             {
@@ -205,9 +206,9 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void RPC_CreatePlayer()
     {
         //Debug.Log("SERVER PLAYER NUMBER: " + PhotonRoom.playersInGame);
-        
 
-        if(PhotonNetwork.CountOfPlayersInRooms == 0)
+        Debug.Log("MYNUMBER: " + myNumberInRoom);
+        if(myNumberInRoom == 1/*PhotonNetwork.CountOfPlayersInRooms == 0*/)
         {
             GameObject tempobj = GameObject.Find("Spawn0");
 

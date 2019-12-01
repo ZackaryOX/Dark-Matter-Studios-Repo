@@ -47,5 +47,7 @@ MonoBehaviour:
   - AwakePickup
   - SetCasterTransparency
   - SetTargetSanity
+  - SetTargetSpeed
+  - SetCasterSpeed
   DisableAutoOpenWizard: 1
   ShowSettings: 1

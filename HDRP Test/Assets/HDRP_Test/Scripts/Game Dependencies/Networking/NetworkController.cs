@@ -19,7 +19,7 @@ public class NetworkController : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     public GameObject RoundStart;
     public GameObject RoundCancel;
-    private string roomname = "Room1";
+    public string roomname = "Room1";
     void Start()
     {
         ThisLobby = this;

@@ -14,16 +14,17 @@ public class Waypoint : MonoBehaviour
 
     void Update()
     {
-        if(player == null && Player.AllPlayers.Count > 0)
-        {
-            player = Player.AllPlayers[0].GetObject();
-        }
+
 
         if(Player.AllPlayers.Count == 0)
         {
 
         }
-        else if (Vector3.Distance(player.transform.position, this.transform.position) < 1)
+        else if (player == null && Player.AllPlayers.Count > 0)
+        {
+            player = Player.AllPlayers[0].GetObject();
+        }
+        else if (player && Vector3.Distance(player.transform.position, this.transform.position) < 1)
         {
             Player.AllPlayers[0].AdvanceLevel();
             Player.AllPlayers[0].AdvanceLevel();

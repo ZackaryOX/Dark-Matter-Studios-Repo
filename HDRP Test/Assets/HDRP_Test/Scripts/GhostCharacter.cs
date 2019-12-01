@@ -34,6 +34,7 @@ public class GhostCharacter : MonoBehaviour
     public GameObject audiosettings;
     public GameObject keybinds;
     public GameObject confirmation;
+    public GameObject UIElements;
 
 
     public Materialise TestAbility;
@@ -48,8 +49,9 @@ public class GhostCharacter : MonoBehaviour
     {
         PauseMenu = new PausedState();
         PV = GetComponent<PhotonView>();
+        UIElements.SetActive(false);
         PlayerAwake();
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 144;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
 
 
@@ -71,7 +73,12 @@ public class GhostCharacter : MonoBehaviour
 
     void LateUpdate()
     {
-        if(TestAbility == null && Player.AllPlayers.Count > 0)
+        
+        if(Player.AllPlayers.Count == 0)
+        {
+            Debug.Log("waiting for players");
+        }
+        else if (TestAbility == null && Player.AllPlayers.Count > 0)
         {
             float LookDamage = 2.0f;
             float AOEDamage = 2.0f;
@@ -80,10 +87,7 @@ public class GhostCharacter : MonoBehaviour
             float ActiveTime = 5.0f;
 
             TestAbility = new Materialise(ThisPlayer, Player.AllPlayers[0], Cooldown, ActiveTime, AOERadius, AOEDamage, LookDamage);
-        }
-        if(Player.AllPlayers.Count == 0)
-        {
-
+            Debug.Log("setting ability");
         }
         else if (PV.IsMine)
         {
@@ -110,6 +114,7 @@ public class GhostCharacter : MonoBehaviour
             input.Update();
             MyCamera.SetActive(true);
             MyFBOCam.SetActive(true);
+            UIElements.SetActive(true);
             Vector2 Data = Player1Stats.GetData();
             StaminaBar.transform.localScale = new Vector3(Data.y / 100, 1, 1);
             HealthBar.transform.localScale = new Vector3(Data.x / 100, 1, 1);
@@ -222,5 +227,17 @@ public class GhostCharacter : MonoBehaviour
     public void SetTargetSanity(float newSanity)
     {
          Player.AllPlayers[0].SetSanity(newSanity);
+    }
+
+    [PunRPC]
+    public void SetTargetSpeed(float newspeed)
+    {
+        Player.AllPlayers[0].SetWalkSpeed(newspeed);
+    }
+
+    [PunRPC]
+    public void SetCasterSpeed(float newspeed)
+    {
+        Ghost.AllGhosts[0].SetWalkSpeed(newspeed);
     }
 }

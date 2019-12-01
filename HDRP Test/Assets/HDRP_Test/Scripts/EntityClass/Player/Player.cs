@@ -111,7 +111,18 @@ public class Player : Entity
     {
         return this.PlayerNumber;
     }
-
+    public void SetWalkSpeed(float temp)
+    {
+        ThisInput.SetWalkSpeed(temp);
+    }
+    public float GetWalkSpeed()
+    {
+        return ThisInput.GetWalkSpeed();
+    }
+    public float GetDefaultSpeed()
+    {
+        return ThisInput.GetDefaultSpeed();
+    }
     //Private
     private Dictionary<int, PlayerObserver> Observers = new Dictionary<int, PlayerObserver>();
     private float Health;

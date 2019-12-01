@@ -33,6 +33,7 @@ public class Character : MonoBehaviour
     public GameObject audiosettings;
     public GameObject keybinds;
     public GameObject confirmation;
+    public GameObject UIElements;
 
     [FMODUnity.EventRef]
     public string[] SFXEventNames;
@@ -44,9 +45,10 @@ public class Character : MonoBehaviour
     {
         PauseMenu = new PausedState();
         PV = GetComponent<PhotonView>();
+        UIElements.SetActive(false);
         PlayerAwake();
         //PV.RPC("PlayerAwake", RpcTarget.AllBuffered);
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 144;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
         Debug.Log("CHARACTER CREATED");
     }
@@ -58,7 +60,7 @@ public class Character : MonoBehaviour
 
     void LateUpdate()
     {
-        if (PV.IsMine )
+        if (PV.IsMine)
         {
             if (input.GetKeyDown("escape"))
             {
@@ -80,6 +82,7 @@ public class Character : MonoBehaviour
             input.Update();
             MyCamera.SetActive(true);
             MyFBOCam.SetActive(true);
+            UIElements.SetActive(true);
             Vector3 Data = Player1Stats.GetData();
             StaminaBar.transform.localScale = new Vector3(Data.y / 100, 1, 1);
             HealthBar.transform.localScale = new Vector3(Data.x / 100, 1, 1);

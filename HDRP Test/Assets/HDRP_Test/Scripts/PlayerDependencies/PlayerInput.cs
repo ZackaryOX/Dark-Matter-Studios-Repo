@@ -29,6 +29,7 @@ public class PlayerInput
 
     //For Walking
     private float Speed = 6f;
+    private float DefaultSpeed = 6.0f;
     private float StartIncrement = 10;
     private float StopIncrement = 5;
     private float VerticalVelocity = 0;
@@ -39,12 +40,12 @@ public class PlayerInput
 
     //For Jumping
     private float YVelocity = 0;
-    private float JumpVelocity = 5;
+    private float JumpVelocity = 3.5f;
     private float FallMultiplier = 1.2f;
     private bool IsJumping = false;
     private bool Adjusted = false;
     private int Jump = 0;
-    private float StaminaDeduction = 10.0f;
+    private float StaminaDeduction = 7.5f;
 
     public float JumpMult = 2.5f;
     public float lowJumpMult = 2f;
@@ -61,6 +62,18 @@ public class PlayerInput
     private float pitch = 0.0f;
     Quaternion OldRot = Quaternion.Euler(new Vector3(0, 0, 0.0f));
 
+    public void SetWalkSpeed(float temp)
+    {
+        Speed = temp;
+    }
+    public float GetWalkSpeed()
+    {
+        return Speed;
+    }
+    public float GetDefaultSpeed()
+    {
+        return DefaultSpeed;
+    }
     Vector3 RotateCamera(PlayerState state)
     {
 

@@ -20,13 +20,26 @@ public class CrawlerTrapNode : TrapNode
     // Update is called once per frame
     void Update()
     {
-        if(MyMouse.mouseOver && Input.GetKeyDown(KeyCode.E))
+        if (Player.AllPlayers.Count > 0 && MyMouse.mouseOver && Input.GetKeyDown(KeyCode.E))
         {
-            
-            Slot.Initiate(LerpTime);
+            if (Ghost.AllGhosts[0].GetTrap().type == TrapType.CRAWLER)
+                isActive = true;
+        }
+        if (isActive)
+        {
+            if (Player.AllPlayers.Count > 0 && Vector3.Distance(Player.AllPlayers[0].GetObject().transform.position, this.transform.position) < 2)
+            {
+                ActivateTrap();
+                isActive = false;
+            }
         }
         Slot.Update();
     }
 
- 
+    public override void ActivateTrap()
+    {
+        Slot.Initiate(LerpTime);
+    }
+
+
 }

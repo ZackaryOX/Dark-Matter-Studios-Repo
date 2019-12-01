@@ -92,6 +92,10 @@ public class Ghost : Entity
     {
         MyRenderers.Add(temp);
     }
+    public Trap GetTrap()
+    {
+        return ThisInventory.GetTrap();
+    }
 
     public void SetTransparency(float albedo)
     {
@@ -101,6 +105,19 @@ public class Ghost : Entity
             tempcolor.a = albedo;
             entry.material.SetColor("_BaseColor", tempcolor);
         }
+    }
+    public void SetWalkSpeed(float temp)
+    {
+        ThisInput.SetWalkSpeed(temp);
+    }
+    public float GetWalkSpeed()
+    {
+        return ThisInput.GetWalkSpeed();
+    }
+
+    public float GetDefaultSpeed()
+    {
+        return ThisInput.GetDefaultSpeed();
     }
     //Private
     private Dictionary<int, GhostObserver> Observers = new Dictionary<int, GhostObserver>();

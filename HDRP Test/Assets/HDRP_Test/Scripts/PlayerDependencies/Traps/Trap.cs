@@ -15,7 +15,7 @@ public class Trap
     //PUBLIC:
     public virtual void Initiate()
     {
-        
+
     }
 
     //PRIVATE:
@@ -24,5 +24,12 @@ public class Trap
         Require.Add(temp);
     }
     List<Requirements> Require = new List<Requirements>();
+    public TrapType type = TrapType.NONE;
 
+}
+
+public enum TrapType
+{
+    NONE,
+    CRAWLER
 }

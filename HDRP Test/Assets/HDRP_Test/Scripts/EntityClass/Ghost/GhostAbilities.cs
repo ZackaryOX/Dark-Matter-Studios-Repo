@@ -12,6 +12,7 @@ abstract public class GhostAbilities
     protected Ghost Caster;
     protected Player Target;
     protected bool Active = false;
+
     protected GhostAbilities(Ghost tempghost, Player tempplayer, float cd, float timeactive)
     {
         Caster = tempghost;
@@ -47,6 +48,9 @@ public class Materialise : GhostAbilities
     private bool IsTransforming = false;
     private float TransformAlbedo = 0.1f;
     private float TransformSpeed = 1.0f;
+    private float OldCasterSpeed;
+    private float NewCasterSpeed;
+    private float Divider = 2.0f;
     public Materialise(Ghost tempghost, Player tempplayer, float cd, float timeactive, float AOERad, float AOEDmg, float Look)
         : base(tempghost, tempplayer, cd, timeactive)
     {
@@ -64,7 +68,6 @@ public class Materialise : GhostAbilities
             TimeTillCooldown = Cooldown;
             Active = true;
             IsTransforming = true;
-            //set ghosts transparency
         }
 
 
@@ -80,6 +83,7 @@ public class Materialise : GhostAbilities
             {
                 TransformAlbedo = 1.0f;
                 IsTransforming = false;
+                temp.RPC("SetCasterSpeed", RpcTarget.AllBuffered, Caster.GetDefaultSpeed() * Divider);
             }
 
             temp.RPC("SetCasterTransparency", RpcTarget.AllBuffered, TransformAlbedo);
@@ -107,23 +111,33 @@ public class Materialise : GhostAbilities
             RaycastHit hit;
             Vector3 Direction = Targetstrans.position - Casterstrans.position;
             float Distance = Vector3.Distance(Casterstrans.position, Targetstrans.position);
-            if (!Physics.Raycast(Casterstrans.position, Direction, out hit,
+            if (!Physics.Raycast(Targetstrans.position, Direction, out hit,
                Distance, layerMask))
             {
                 float thisFramesDamage = 0;
 
-                if (Vector3.Angle(TargetsHeadtrans.forward, Casterstrans.position - TargetsHeadtrans.position) <= 55)
+                if (Vector3.Angle(TargetsHeadtrans.forward, Casterstrans.position - TargetsHeadtrans.position) <= 60)
                 {
 
-
+                    Debug.Log("doing look");
                     thisFramesDamage += LookDamage * Time.deltaTime;
 
                 }
 
                 if (Distance <= AOERadius)
                 {
+                    Debug.Log("doing aoe");
                     thisFramesDamage += AOEDamage * Time.deltaTime;
 
+                    if(Target.GetWalkSpeed() != Target.GetDefaultSpeed() / Divider)
+                    {
+                        temp.RPC("SetTargetSpeed", RpcTarget.AllBuffered, Target.GetDefaultSpeed() / Divider);
+                    }
+                    
+                }
+                else if(Target.GetWalkSpeed() != Target.GetDefaultSpeed())
+                {
+                    temp.RPC("SetTargetSpeed", RpcTarget.AllBuffered, Target.GetDefaultSpeed());
                 }
 
 
@@ -145,6 +159,12 @@ public class Materialise : GhostAbilities
         }
         else if (Active && Timer.ElapsedTime - TimeActivated >= TimeActive)
         {
+            temp.RPC("SetCasterSpeed", RpcTarget.AllBuffered, Caster.GetDefaultSpeed());
+
+            if (Target.GetWalkSpeed() != Target.GetDefaultSpeed())
+            {
+                temp.RPC("SetTargetSpeed", RpcTarget.AllBuffered, Target.GetDefaultSpeed());
+            }
             Active = false;
             IsTransforming = true;
         }
@@ -222,6 +242,7 @@ public class Materialise : GhostAbilities
 
                 if(Distance <= AOERadius)
                 {
+                    
                     float CurrentDamage = AOEDamage * Time.deltaTime;
                     float CurrentSanityToSet = 0;
                     float SanityToTest = Target.GetSanity() - CurrentDamage;
