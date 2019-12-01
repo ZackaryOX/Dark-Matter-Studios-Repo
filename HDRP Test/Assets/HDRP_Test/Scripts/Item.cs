@@ -26,6 +26,7 @@ public class Item : MonoBehaviour
             transform.parent = null;
             GetComponent<MeshCollider>().isTrigger = true;
             GetComponent<mouseHovor>().enabled = false;
+            GetComponent<mouseHovor>().mouseOver = false;
         }
     }
 }

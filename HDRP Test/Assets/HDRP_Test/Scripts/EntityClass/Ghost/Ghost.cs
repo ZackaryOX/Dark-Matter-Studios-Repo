@@ -80,9 +80,31 @@ public class Ghost : Entity
     {
         return Health;
     }
+    public GameObject GetHead()
+    {
+        return Head;
+    }
+    public int GetGhostNumber()
+    {
+        return this.GhostNumber;
+    }
+    public void AddRenderer(SkinnedMeshRenderer temp)
+    {
+        MyRenderers.Add(temp);
+    }
 
+    public void SetTransparency(float albedo)
+    {
+        foreach (SkinnedMeshRenderer entry in MyRenderers)
+        {
+            Color tempcolor = entry.material.GetColor("_BaseColor");
+            tempcolor.a = albedo;
+            entry.material.SetColor("_BaseColor", tempcolor);
+        }
+    }
     //Private
     private Dictionary<int, GhostObserver> Observers = new Dictionary<int, GhostObserver>();
+    private List<SkinnedMeshRenderer> MyRenderers = new List<SkinnedMeshRenderer>();
     private float TutorialScore = 0;
     private GhostInput ThisInput;
     private float Health;

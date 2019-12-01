@@ -18,6 +18,8 @@ public class GhostCharacter : MonoBehaviour
     public Text SlotNumber;
     public Image StaminaBar;
     public Image HealthBar;
+    public GameObject Surfaces;
+    public GameObject Joints;
     GhostInventory hotbar;
     GhostStatObserver Player1Stats;
     GhostScoreObserver Player1Score;
@@ -33,6 +35,9 @@ public class GhostCharacter : MonoBehaviour
     public GameObject keybinds;
     public GameObject confirmation;
 
+
+    public Materialise TestAbility;
+
     [FMODUnity.EventRef]
     public string[] SFXEventNames;
 
@@ -46,8 +51,19 @@ public class GhostCharacter : MonoBehaviour
         PlayerAwake();
         Application.targetFrameRate = 60;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
-    }
 
+
+        ThisPlayer.AddRenderer(Surfaces.GetComponent<SkinnedMeshRenderer>());
+
+        ThisPlayer.AddRenderer(Joints.GetComponent<SkinnedMeshRenderer>());
+        ThisPlayer.SetTransparency(0.1f);
+
+       
+    }
+    private void Start()
+    {
+        
+    }
     void Update()
     {
 
@@ -55,7 +71,21 @@ public class GhostCharacter : MonoBehaviour
 
     void LateUpdate()
     {
-        if (PV.IsMine)
+        if(TestAbility == null && Player.AllPlayers.Count > 0)
+        {
+            float LookDamage = 2.0f;
+            float AOEDamage = 2.0f;
+            float AOERadius = 3.5f;
+            float Cooldown = 5.0f;
+            float ActiveTime = 5.0f;
+
+            TestAbility = new Materialise(ThisPlayer, Player.AllPlayers[0], Cooldown, ActiveTime, AOERadius, AOEDamage, LookDamage);
+        }
+        if(Player.AllPlayers.Count == 0)
+        {
+
+        }
+        else if (PV.IsMine)
         {
             if (input.GetKeyDown("escape"))
             {
@@ -71,7 +101,10 @@ public class GhostCharacter : MonoBehaviour
                     Resume();
                 }
             }
-
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                TestAbility.Activate();
+            }
             ThisPlayer.Update();
             hotbar.Update();
             input.Update();
@@ -80,6 +113,8 @@ public class GhostCharacter : MonoBehaviour
             Vector2 Data = Player1Stats.GetData();
             StaminaBar.transform.localScale = new Vector3(Data.y / 100, 1, 1);
             HealthBar.transform.localScale = new Vector3(Data.x / 100, 1, 1);
+            TestAbility.Update(PV);
+
         }
 
     }
@@ -175,5 +210,17 @@ public class GhostCharacter : MonoBehaviour
     {
         Debug.Log("THIS IS HOW MANY PLAYERS: " + Player.AllPlayers.Count + " FROM PLAYER " + ThisPlayer.GetName());
         //Player1.SetPosition(GameObject.Find("Spawn0").transform.position);
+    }
+
+    [PunRPC]
+    public void SetCasterTransparency(float albedo)
+    {
+        Ghost.AllGhosts[0].SetTransparency(albedo);
+    }
+
+    [PunRPC]
+    public void SetTargetSanity(float newSanity)
+    {
+         Player.AllPlayers[0].SetSanity(newSanity);
     }
 }

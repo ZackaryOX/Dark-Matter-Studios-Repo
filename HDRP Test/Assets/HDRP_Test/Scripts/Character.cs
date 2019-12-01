@@ -45,8 +45,10 @@ public class Character : MonoBehaviour
         PauseMenu = new PausedState();
         PV = GetComponent<PhotonView>();
         PlayerAwake();
-        Application.targetFrameRate = 144;
+        //PV.RPC("PlayerAwake", RpcTarget.AllBuffered);
+        Application.targetFrameRate = 60;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
+        Debug.Log("CHARACTER CREATED");
     }
 
     void Update()
@@ -58,7 +60,7 @@ public class Character : MonoBehaviour
     {
         if (PV.IsMine )
         {
-            if (input.GetKey("escape"))
+            if (input.GetKeyDown("escape"))
             {
                 if (OldState == null)
                 {

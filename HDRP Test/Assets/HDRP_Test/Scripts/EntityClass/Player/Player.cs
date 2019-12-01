@@ -10,7 +10,7 @@ public class Player : Entity
     public Player(GameObject thisobject, GameObject temphead, PlayerInventory tempinv, bool isEditor, InputManager tempInput) : base(thisobject)
     {
         Head = temphead;
-        
+
         ThisInput = new PlayerInput(thisobject, temphead, tempInput, tempinv);
         ThisStamina = new Stamina(100, 12.5f, 40.0f);
         ThisInventory = tempinv;
@@ -103,7 +103,14 @@ public class Player : Entity
     {
         Observers.Remove(temp.GetID());
     }
-
+    public GameObject GetHead()
+    {
+        return Head;
+    }
+    public int GetPlayerNumber()
+    {
+        return this.PlayerNumber;
+    }
 
     //Private
     private Dictionary<int, PlayerObserver> Observers = new Dictionary<int, PlayerObserver>();

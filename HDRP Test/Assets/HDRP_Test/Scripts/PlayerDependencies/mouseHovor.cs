@@ -21,7 +21,6 @@ public class mouseHovor : MonoBehaviour
 
     void Awake()
     {
-        //ObjectMoving = this.gameObject;
         Rend = GetComponent<MeshRenderer>();
         OldMat = Rend.material;
         Object = gameObject;
@@ -36,22 +35,12 @@ public class mouseHovor : MonoBehaviour
         if (Object == lookingAt)
         {
             mouseOver = true;
+            Rend.material = NewMat;
         }
         else
         {
             mouseOver = false;
-            if (!MovingStuff)
-            {
-                Rend.material = OldMat;
-            }
-        }
-
-
-        if (mouseOver && !MovingStuff)
-        {
-
-            Rend.material = NewMat;
-
+            Rend.material = OldMat;
         }
 
 
