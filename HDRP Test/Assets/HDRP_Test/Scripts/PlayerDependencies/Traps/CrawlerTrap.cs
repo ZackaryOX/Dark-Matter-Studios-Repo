@@ -8,6 +8,10 @@ public class CrawlerTrap : Trap
 {
 
     //CONSTRUCTOR:
+    public CrawlerTrap()
+    {
+        type = TrapType.CRAWLER;
+    }
     public CrawlerTrap(GameObject Prefab, GameObject Start, GameObject End) : base()
     {
 

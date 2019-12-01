@@ -24,6 +24,8 @@ public class GhostCharacter : MonoBehaviour
     GhostStatObserver Player1Stats;
     GhostScoreObserver Player1Score;
 
+    public Sprite CrawlerIcon;
+
     private InputManager input;
     private PausedState PauseMenu;
     private PlayerState OldState;
@@ -209,6 +211,8 @@ public class GhostCharacter : MonoBehaviour
         /*FOR TUTORIAL:*///ThisPlayer.SetState(new TeachWalkState());
         /*FOR EDITING:*/ThisPlayer.SetState(new TeachPickupState());
 
+        CrawlerTrap crawlertemp = new CrawlerTrap();
+        hotbar.AddTrap(crawlertemp, CrawlerIcon);
     }
     [PunRPC]
     void SetPosition()

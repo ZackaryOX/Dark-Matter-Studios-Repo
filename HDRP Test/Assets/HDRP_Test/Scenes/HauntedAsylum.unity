@@ -4603,6 +4603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RoundStart: {fileID: 462924907}
   RoundCancel: {fileID: 2018318453}
+  roomname: Room1
 --- !u!4 &419289598
 Transform:
   m_ObjectHideFlags: 0
@@ -15359,6 +15360,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 857467848689144940, guid: f8a6555a61abeec4e9891c852fd0ac36,
+        type: 3}
+      propertyPath: m_Name
+      value: TVs
+      objectReference: {fileID: 0}
     - target: {fileID: 2508211858215757080, guid: f8a6555a61abeec4e9891c852fd0ac36,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15428,11 +15434,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 26.222855
-      objectReference: {fileID: 0}
-    - target: {fileID: 857467848689144940, guid: f8a6555a61abeec4e9891c852fd0ac36,
-        type: 3}
-      propertyPath: m_Name
-      value: TVs
       objectReference: {fileID: 0}
     - target: {fileID: 6959845289289842095, guid: f8a6555a61abeec4e9891c852fd0ac36,
         type: 3}
@@ -24245,7 +24246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9733d74121e37ca45948d7132b42a072, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemImage: {fileID: 21300000, guid: b7fbbeb8fb00dd448ad96aa0a51c9818, type: 3}
+  ItemImage: {fileID: 21300000, guid: f1444c32e7c7fac4eaceebe2e24cf55c, type: 3}
 --- !u!64 &1835194921899544592
 MeshCollider:
   m_ObjectHideFlags: 0

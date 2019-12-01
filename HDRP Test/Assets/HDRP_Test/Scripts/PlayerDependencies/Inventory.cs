@@ -192,14 +192,14 @@ public class GhostInventory : Inventory
     {
         return Traps[selected];
     }
-    public void AddTrap(Trap temp)
+    public void AddTrap(Trap temp,Sprite icontemp)
     {
         for (int i = 0; i < 10; i++)
         {
             if (Traps[i] == null)
             {
                 Traps[i] = temp;
-                //ItemIcons[i].GetComponent<Image>().sprite = Items[i].GetIcon();
+                ItemIcons[i].GetComponent<Image>().sprite = icontemp;
                 break;
             }
         }
