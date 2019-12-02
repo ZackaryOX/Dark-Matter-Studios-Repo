@@ -119,14 +119,14 @@ public class Materialise : GhostAbilities
                 if (Vector3.Angle(TargetsHeadtrans.forward, Casterstrans.position - TargetsHeadtrans.position) <= 60)
                 {
 
-                    Debug.Log("doing look");
+                    //Debug.Log("doing look");
                     thisFramesDamage += LookDamage * Time.deltaTime;
 
                 }
 
                 if (Distance <= AOERadius)
                 {
-                    Debug.Log("doing aoe");
+                    //Debug.Log("doing aoe");
                     thisFramesDamage += AOEDamage * Time.deltaTime;
 
                     if(Target.GetWalkSpeed() != Target.GetDefaultSpeed() / Divider)

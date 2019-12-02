@@ -28,8 +28,8 @@ public class PlayerInput
 
 
     //For Walking
-    private float Speed = 6f;
-    private float DefaultSpeed = 6.0f;
+    private float Speed = 18f;
+    private float DefaultSpeed = 18.0f;
     private float StartIncrement = 10;
     private float StopIncrement = 5;
     private float VerticalVelocity = 0;
@@ -40,7 +40,7 @@ public class PlayerInput
 
     //For Jumping
     private float YVelocity = 0;
-    private float JumpVelocity = 3.5f;
+    private float JumpVelocity = 10f;
     private float FallMultiplier = 1.2f;
     private bool IsJumping = false;
     private bool Adjusted = false;
@@ -50,8 +50,8 @@ public class PlayerInput
     public float JumpMult = 2.5f;
     public float lowJumpMult = 2f;
     //For Gravity
-    private Vector3 BaseGravityForce = new Vector3(0, -9.8f, 0);
-    private Vector3 AdjustedGravityForce = new Vector3(0, -9.8f, 0);
+    private Vector3 BaseGravityForce = new Vector3(0, -9.8f * 2.8f, 0);
+    private Vector3 AdjustedGravityForce = new Vector3(0, -9.8f * 2.8f, 0);
 
     //For Camera
     private float speedH = 2.0f;

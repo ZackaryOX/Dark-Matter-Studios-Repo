@@ -23,9 +23,17 @@ public class Ghost : Entity
             GhostNumber = Ghosts;
             Ghosts++;
             AllGhosts.Add(GhostNumber, this);
+            Added = true;
         }
     }
 
+    ~Ghost()
+    {
+        if (Added)
+        {
+            AllGhosts.Remove(GhostNumber);
+        }
+    }
 
     //Public
     public float GetStamina()
@@ -128,6 +136,7 @@ public class Ghost : Entity
     PlayerState Mystate;
     private int GhostNumber = 0;
     private GhostInventory ThisInventory;
+    private bool Added = false;
     private GameObject Head;
     private Stamina ThisStamina;
 }

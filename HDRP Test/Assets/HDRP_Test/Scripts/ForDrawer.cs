@@ -9,6 +9,12 @@ public class ForDrawer : MonoBehaviour
     public GameObject OutterDrawer;
     Drawer ThisDrawer;
     PhotonView DrawerView;
+
+    [FMODUnity.EventRef]
+    public string musicEventName = "";
+    FMOD.Studio.EventInstance musiceventinstance;
+
+    private float CurrentState = 0;
     void Awake()
     {
         Debug.Log("creating drawer");
@@ -17,6 +23,10 @@ public class ForDrawer : MonoBehaviour
     private void Start()
     {
         DrawerView = GetComponent<PhotonView>();
+        //Instantiate the FMOD instance
+        musiceventinstance = FMODUnity.RuntimeManager.CreateInstance(musicEventName);
+        //Attach the event to the object
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(musiceventinstance, GetComponent<Transform>(), GetComponent<Rigidbody>());
     }
 
     // Update is called once per frame
@@ -36,6 +46,16 @@ public class ForDrawer : MonoBehaviour
     {
 
         ThisDrawer.Interact();
+        if (ThisDrawer.GetIsOpen() == false)
+        {
+            CurrentState = 0;
+        }
+        else
+        {
+            CurrentState = 1;
+        }
 
+        musiceventinstance.setParameterByName("State", CurrentState);
+        musiceventinstance.start();
     }
 }

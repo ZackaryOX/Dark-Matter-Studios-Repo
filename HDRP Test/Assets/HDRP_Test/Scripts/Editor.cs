@@ -63,6 +63,7 @@ public class Editor : MonoBehaviour
     void OnAnimatorIK()
     {
 
+        //Animator ThisAnim = this.GetObject().GetComponent<Animator>();
         Vector3 worldpos = new Vector3(0.25f, 0, 1);
 
         Vector2 mousePos = Input.mousePosition;
@@ -72,8 +73,8 @@ public class Editor : MonoBehaviour
 
         ThisAnim.SetIKPosition(AvatarIKGoal.RightHand, newVec);
         ThisAnim.SetIKPositionWeight(AvatarIKGoal.RightHand, weight);
-        
-        ThisAnim.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.Euler(new Vector3(x,y, z) + ThisPlayer.GetRotationEuler()));
+
+        ThisAnim.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.Euler(new Vector3(x, y, z) + ThisPlayer.GetRotationEuler()));
         ThisAnim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
     }
 
@@ -115,7 +116,7 @@ public class Editor : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.P))
         {
-            Debug.Log(new Vector3(x,y,z));
+            Debug.Log(weight);
         }
         ThisPlayer.Update();
         hotbar.Update();

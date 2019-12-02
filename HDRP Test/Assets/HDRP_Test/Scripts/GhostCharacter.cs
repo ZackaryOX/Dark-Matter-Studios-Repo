@@ -37,7 +37,7 @@ public class GhostCharacter : MonoBehaviour
     public GameObject keybinds;
     public GameObject confirmation;
     public GameObject UIElements;
-
+    private bool DoorsDeleted = false;
 
     public Materialise TestAbility;
 
@@ -81,10 +81,10 @@ public class GhostCharacter : MonoBehaviour
         }
         else if (TestAbility == null && Player.AllPlayers.Count > 0)
         {
-            float LookDamage = 2.0f;
-            float AOEDamage = 2.0f;
-            float AOERadius = 3.5f;
-            float Cooldown = 5.0f;
+            float LookDamage = 7.5f;
+            float AOEDamage = 7.5f;
+            float AOERadius = 10f;
+            float Cooldown = 10.0f;
             float ActiveTime = 5.0f;
 
             TestAbility = new Materialise(ThisPlayer, Player.AllPlayers[0], Cooldown, ActiveTime, AOERadius, AOEDamage, LookDamage);
@@ -92,6 +92,16 @@ public class GhostCharacter : MonoBehaviour
         }
         else if (PV.IsMine)
         {
+            if (!DoorsDeleted && Door.AllDoors.Count > 0)
+            {
+                DoorsDeleted = true;
+
+                foreach (KeyValuePair<string, Door> entry in Door.AllDoors )
+                {
+                    Destroy(entry.Value.GetObject().GetComponent<MeshCollider>());
+                    Debug.Log("deleting door colliders");
+                }
+            }
             if (input.GetKeyDown("escape"))
             {
                 if (OldState == null)

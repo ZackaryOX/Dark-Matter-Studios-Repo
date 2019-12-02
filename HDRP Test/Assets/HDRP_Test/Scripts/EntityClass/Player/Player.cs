@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,9 +27,17 @@ public class Player : Entity
             PlayerNumber = Players;
             Players++;
             AllPlayers.Add(PlayerNumber, this);
+            Added = true;
         }
     }
 
+    ~Player()
+    {
+        if(Added)
+        {
+            AllPlayers.Remove(PlayerNumber);
+        }
+    }
 
     //Public
     public PlayerState GetState()
@@ -66,7 +75,35 @@ public class Player : Entity
         ThisInput.Update(ThisStamina, Mystate, CurrentHandTarget);
         TutorialScore = Timer.ElapsedTime;
 
+        if(GetSanity() < 100)
+        {
+            Sanity += SanityRegen * Time.deltaTime;
+            if(Sanity > 100.0f)
+            {
+                Sanity = 100;
+            }
 
+            if(Health > 0.0f)
+            {
+                float Multiplier = 0;
+                if(Sanity < 75)
+                {
+                    Multiplier = 1;
+                }
+                if (Sanity < 50)
+                {
+                    Multiplier = 2;
+                }
+                if(Sanity < 25)
+                {
+                    Multiplier = 3;
+                }
+
+                Health -= Multiplier * HealthDamage * Time.deltaTime;
+            }
+
+            GetObject().GetComponent<PhotonView>().RPC("UpdatePlayer", RpcTarget.OthersBuffered, GetSanity(), GetHealth());
+        }
 
         foreach(KeyValuePair<int, PlayerObserver> entry in Observers)
         {
@@ -132,6 +169,25 @@ public class Player : Entity
     {
         DefaultHandTarget = newhand;
     }
+    public void PutHandOut()
+    {
+        if (ThisInventory.IsItemInHand())
+        {
+            Animator ThisAnim = this.GetObject().GetComponent<Animator>();
+            Vector3 worldpos = new Vector3(0.75f, 0, 3);
+
+            Vector2 mousePos = Input.mousePosition;
+            worldpos.x = mousePos.x;
+            worldpos.y = mousePos.y;
+            Vector3 newVec = Camera.main.ScreenToWorldPoint(worldpos);
+
+            ThisAnim.SetIKPosition(AvatarIKGoal.RightHand, newVec);
+            ThisAnim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0.42f);
+
+            ThisAnim.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.Euler(new Vector3(27.0f, -50.0f, -160.0f) + this.GetRotationEuler()));
+            ThisAnim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+        }
+    }
     //Private
     private Dictionary<int, PlayerObserver> Observers = new Dictionary<int, PlayerObserver>();
     private float Health;
@@ -144,5 +200,8 @@ public class Player : Entity
     private PlayerInventory ThisInventory;
     private GameObject Head;
     private int PlayerNumber;
+    private bool Added = false;
     private Stamina ThisStamina;
+    private float SanityRegen = 0.75f;
+    private float HealthDamage = 0.5f;
 }

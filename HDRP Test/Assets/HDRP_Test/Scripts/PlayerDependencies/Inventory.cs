@@ -150,7 +150,17 @@ public class PlayerInventory : Inventory
             Items[selected].SetRotationEuler(GameObject.Find("mixamorig:RightHandIndex1").transform.rotation.eulerAngles);
         }
     }
-
+    public bool IsItemInHand()
+    {
+        if(Items[selected] == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
     private List<PickUp> Items = new List<PickUp>() { };
 }

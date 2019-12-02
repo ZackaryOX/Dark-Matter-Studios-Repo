@@ -49,5 +49,6 @@ MonoBehaviour:
   - SetTargetSanity
   - SetTargetSpeed
   - SetCasterSpeed
+  - UpdateSanity
   DisableAutoOpenWizard: 1
   ShowSettings: 1

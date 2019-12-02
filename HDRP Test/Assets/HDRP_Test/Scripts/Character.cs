@@ -27,7 +27,8 @@ public class Character : MonoBehaviour
     private PausedState PauseMenu;
     private PlayerState OldState;
     public AudioManager ThisAudioManager;
-
+    private bool PlayedMusic = false;
+    private bool DeletedDoors = false;
     public GameObject HandTarget;
     public GameObject menu;
     public GameObject settings;
@@ -59,10 +60,25 @@ public class Character : MonoBehaviour
                
     }
 
+    void OnAnimatorIK()
+    {
+        if (PV.IsMine)
+        {
+            ThisPlayer.PutHandOut();
+        }
+    }
+
+
     void LateUpdate()
     {
         if (PV.IsMine)
         {
+           
+            if (!PlayedMusic)
+            {
+                PlayedMusic = true;
+                ThisAudioManager.PlayMusic();
+            }
             if (input.GetKeyDown("escape"))
             {
                 if (OldState == null)
@@ -88,7 +104,7 @@ public class Character : MonoBehaviour
             StaminaBar.transform.localScale = new Vector3(Data.y / 100, 1, 1);
             HealthBar.transform.localScale = new Vector3(Data.x / 100, 1, 1);
             SanityBar.transform.localScale = new Vector3(Data.z / 100, 1, 1);
-            ThisAudioManager.Update(100 - Data.z);
+            ThisAudioManager.Update(Data.z);
         }
         
     }
@@ -179,9 +195,9 @@ public class Character : MonoBehaviour
        /*FOR EDITING:*/  ThisPlayer.SetState(new TeachPickupState());
     }
     [PunRPC]
-    void SetPosition()
+    void UpdatePlayer(float Sanity, float health)
     {
-        Debug.Log("THIS IS HOW MANY PLAYERS: " + Player.AllPlayers.Count+  " FROM PLAYER " + ThisPlayer.GetName());
-        //Player1.SetPosition(GameObject.Find("Spawn0").transform.position);
+        ThisPlayer.SetSanity(Sanity);
+        ThisPlayer.SetHealth(health);
     }
 }
