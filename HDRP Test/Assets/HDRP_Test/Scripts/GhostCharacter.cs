@@ -47,6 +47,9 @@ public class GhostCharacter : MonoBehaviour
     [FMODUnity.EventRef]
     public string[] MusicEventNames;
 
+    [FMODUnity.EventRef]
+    public string AbilityAudio;
+    FMOD.Studio.EventInstance AbilityInstance;
     void Awake()
     {
         PauseMenu = new PausedState();
@@ -57,6 +60,8 @@ public class GhostCharacter : MonoBehaviour
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
 
 
+
+
         ThisPlayer.AddRenderer(Surfaces.GetComponent<SkinnedMeshRenderer>());
         ThisPlayer.AddRenderer(Sheet.GetComponent<SkinnedMeshRenderer>());
         ThisPlayer.SetTransparency(0.2f);
@@ -65,7 +70,8 @@ public class GhostCharacter : MonoBehaviour
     }
     private void Start()
     {
-        
+        AbilityInstance = FMODUnity.RuntimeManager.CreateInstance(AbilityAudio);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(AbilityInstance, head.GetComponent<Transform>(), head.GetComponent<Rigidbody>());
     }
     void Update()
     {
@@ -253,5 +259,17 @@ public class GhostCharacter : MonoBehaviour
     public void SetCasterSpeed(float newspeed)
     {
         Ghost.AllGhosts[0].SetWalkSpeed(newspeed);
+    }
+
+    [PunRPC]
+    public void PlayGhostAudio()
+    {
+        AbilityInstance.start();
+    }
+
+    [PunRPC]
+    public void StopGhostAudio()
+    {
+        AbilityInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }

@@ -52,5 +52,7 @@ MonoBehaviour:
   - UpdateSanity
   - PlayAudio
   - StopAudio
+  - PlayGhostAudio
+  - StopGhostAudio
   DisableAutoOpenWizard: 1
   ShowSettings: 1

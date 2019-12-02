@@ -38,7 +38,7 @@ public class CrawlerTrapNode : TrapNode
         if (Player.AllPlayers.Count > 0 &&  Ghost.AllGhosts.Count > 0)
         {
 
-            if ( Ghost.AllGhosts[0].GetTrap().type == TrapType.CRAWLER && MyMouse.mouseOver && Input.GetKeyDown(KeyCode.E))
+            if (Ghost.AllGhosts[0].GetTrap() != null && Ghost.AllGhosts[0].GetTrap().type == TrapType.CRAWLER && MyMouse.mouseOver && Input.GetKeyDown(KeyCode.E))
             {
 
                 isActive = true;

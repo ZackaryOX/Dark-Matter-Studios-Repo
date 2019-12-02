@@ -102,6 +102,9 @@ public class Ghost : Entity
     }
     public Trap GetTrap()
     {
+        if (this.ThisInventory.GetTrap() == null)
+            return null;
+
         return ThisInventory.GetTrap();
     }
 
