@@ -30,7 +30,19 @@ public class mouseHovor : MonoBehaviour
 
     void Update()
     {
-        lookingAt = GameObject.Find(rayFromCamera.lookingAt);
+        if(Player.AllPlayers.Count > 0)
+        {
+            if(Player.AllPlayers[0].GetObject().GetComponentInChildren<rayFromCamera>() == null)
+            {
+
+            }
+            else
+            {
+                lookingAt = GameObject.Find(Player.AllPlayers[0].GetObject().GetComponentInChildren<rayFromCamera>().lookingAt);
+            }
+            
+        }
+        
 
         if (Object == lookingAt)
         {

@@ -28,8 +28,8 @@ public class GhostInput
 
 
     //For Walking
-    private float Speed = 3f;
-    private float DefaultSpeed = 3.0f;
+    private float Speed = 6f;
+    private float DefaultSpeed = 6.0f;
     private float StartIncrement = 10;
     private float StopIncrement = 5;
     private float VerticalVelocity = 0;

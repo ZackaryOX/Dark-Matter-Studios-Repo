@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class rayFromCamera : MonoBehaviour
 {
-    public static string lookingAt; //static so the other script can read the name.
+    public string lookingAt = null; //static so the other script can read the name.
     public string displayObject;
     public RaycastHit obj;
 

@@ -10396,7 +10396,7 @@ PrefabInstance:
     - target: {fileID: 8111034468788985803, guid: 8a9c7766afbbfe14c99422a2e0f22761,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8111034468788985803, guid: 8a9c7766afbbfe14c99422a2e0f22761,
         type: 3}
@@ -15403,7 +15403,7 @@ PrefabInstance:
     - target: {fileID: 2508211858215757080, guid: f8a6555a61abeec4e9891c852fd0ac36,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2508211858215757080, guid: f8a6555a61abeec4e9891c852fd0ac36,
         type: 3}
@@ -57261,8 +57261,8 @@ GameObject:
   - component: {fileID: 8154865320938855392}
   - component: {fileID: 8154865320938855393}
   - component: {fileID: 8154865320938855390}
-  - component: {fileID: 8154865320938855391}
   - component: {fileID: 8154865320938855394}
+  - component: {fileID: 8154865320938855389}
   m_Layer: 0
   m_Name: CrawlerTrap
   m_TagString: Untagged
@@ -57270,6 +57270,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8154865320938855389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8154865320938855388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90102d15fa4cce14e803533777d843c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NewMat: {fileID: 2100000, guid: a356c3bcdbd9b084ca57cd308040b7b4, type: 2}
+  Object: {fileID: 0}
+  lookingAt: {fileID: 0}
+  mouseOver: 0
 --- !u!65 &8154865320938855390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57283,22 +57299,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8154865320938855391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8154865320938855388}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96f6f63763708da4880a50578092dc0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NewMat: {fileID: 2100000, guid: a356c3bcdbd9b084ca57cd308040b7b4, type: 2}
-  Object: {fileID: 0}
-  lookingAt: {fileID: 0}
-  mouseOver: 0
 --- !u!33 &8154865320938855392
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -57373,7 +57373,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 0.39, z: 0.45}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8154865321429336144
 Transform:
@@ -57387,7 +57387,7 @@ Transform:
   m_LocalScale: {x: 0.21600011, y: 0.0195, z: 0.30000013}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &8154865321429336145
 GameObject:
@@ -57511,7 +57511,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 0.0195, z: 0.45}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8154865322165298952
 MeshFilter:

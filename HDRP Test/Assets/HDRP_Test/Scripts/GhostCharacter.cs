@@ -19,7 +19,7 @@ public class GhostCharacter : MonoBehaviour
     public Image StaminaBar;
     public Image HealthBar;
     public GameObject Surfaces;
-    public GameObject Joints;
+    public GameObject Sheet;
     GhostInventory hotbar;
     GhostStatObserver Player1Stats;
     GhostScoreObserver Player1Score;
@@ -58,9 +58,8 @@ public class GhostCharacter : MonoBehaviour
 
 
         ThisPlayer.AddRenderer(Surfaces.GetComponent<SkinnedMeshRenderer>());
-
-        ThisPlayer.AddRenderer(Joints.GetComponent<SkinnedMeshRenderer>());
-        ThisPlayer.SetTransparency(0.1f);
+        ThisPlayer.AddRenderer(Sheet.GetComponent<SkinnedMeshRenderer>());
+        ThisPlayer.SetTransparency(0.2f);
 
        
     }
@@ -114,6 +113,7 @@ public class GhostCharacter : MonoBehaviour
             ThisPlayer.Update();
             hotbar.Update();
             input.Update();
+            Sheet.SetActive(false);
             MyCamera.SetActive(true);
             MyFBOCam.SetActive(true);
             UIElements.SetActive(true);

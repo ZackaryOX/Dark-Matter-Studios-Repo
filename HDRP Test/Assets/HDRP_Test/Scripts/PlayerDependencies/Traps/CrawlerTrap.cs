@@ -91,6 +91,65 @@ public class CrawlerTrap : Trap
             CurrentCrawler.transform.position = Vector3.Lerp(StartPoint, EndPoint, LerpParam);
 
             LerpParam = reset ? 0 : LerpParam;
+
+            PhotonView temp = Ghost.AllGhosts[0].GetObject().GetComponent<PhotonView>();
+
+            //TESTING
+            if (temp.IsMine)
+            {
+                Player Target = Player.AllPlayers[0];
+                Transform TargetsHeadtrans = Target.GetHead().transform;
+                Transform Targetstrans = Target.GetObject().transform;
+                Transform Casterstrans = CurrentCrawler.transform;
+                float Divider = 2;
+                int layerMask = 1 << 8;
+                layerMask = ~layerMask;
+                RaycastHit hit;
+                Vector3 Direction = Targetstrans.position - Casterstrans.position;
+                float Distance = Vector3.Distance(Casterstrans.position, Targetstrans.position);
+                if (!Physics.Raycast(Targetstrans.position, Direction, out hit,
+                   Distance, layerMask))
+                {
+                    float thisFramesDamage = 0;
+
+                    if (Vector3.Angle(TargetsHeadtrans.forward, Casterstrans.position - TargetsHeadtrans.position) <= 60)
+                    {
+
+                        Debug.Log("doing look");
+                        thisFramesDamage += LookDamage * Time.deltaTime;
+
+                    }
+
+                    if (Distance <= AOERadius)
+                    {
+                        Debug.Log("doing aoe");
+                        thisFramesDamage += AOEDamage * Time.deltaTime;
+
+                        if (Target.GetWalkSpeed() != Target.GetDefaultSpeed() / Divider)
+                        {
+                            temp.RPC("SetTargetSpeed", RpcTarget.AllBuffered, Target.GetDefaultSpeed() / Divider);
+                        }
+
+                    }
+                    else if (Target.GetWalkSpeed() != Target.GetDefaultSpeed())
+                    {
+                        temp.RPC("SetTargetSpeed", RpcTarget.AllBuffered, Target.GetDefaultSpeed());
+                    }
+
+
+                    if (thisFramesDamage > 0)
+                    {
+                        float CurrentSanityToSet = 0;
+                        float SanityToTest = Target.GetSanity() - thisFramesDamage;
+                        if (SanityToTest > 0.0f)
+                        {
+                            CurrentSanityToSet = SanityToTest;
+                        }
+                        temp.RPC("SetTargetSanity", RpcTarget.AllBuffered, CurrentSanityToSet);
+                    }
+                }
+            }
+            
         }
     }
 
@@ -113,4 +172,7 @@ public class CrawlerTrap : Trap
     private bool IsLerping = false;
     private float LerpParam = 0;
     private float LerpTime = 1;
+    private float LookDamage = 5.0f;
+    private float AOERadius = 4f;
+    private float AOEDamage = 5.0f;
 }

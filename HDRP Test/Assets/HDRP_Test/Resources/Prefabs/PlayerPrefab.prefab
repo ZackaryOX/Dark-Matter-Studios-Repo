@@ -6006,6 +6006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 254ef58b5946cb349b7dbca81f2be3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lookingAt: 
   displayObject: 
 --- !u!114 &340030018556294749
 MonoBehaviour:

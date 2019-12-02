@@ -83,7 +83,7 @@ public class Materialise : GhostAbilities
             {
                 TransformAlbedo = 1.0f;
                 IsTransforming = false;
-                temp.RPC("SetCasterSpeed", RpcTarget.AllBuffered, Caster.GetDefaultSpeed() * Divider);
+                temp.RPC("SetCasterSpeed", RpcTarget.AllBuffered, Caster.GetDefaultSpeed() / Divider);
             }
 
             temp.RPC("SetCasterTransparency", RpcTarget.AllBuffered, TransformAlbedo);
