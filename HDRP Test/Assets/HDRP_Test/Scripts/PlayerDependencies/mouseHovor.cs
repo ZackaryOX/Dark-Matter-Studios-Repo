@@ -42,17 +42,20 @@ public class mouseHovor : MonoBehaviour
             }
             
         }
-        
 
-        if (Object == lookingAt)
+        if (lookingAt)
         {
-            mouseOver = true;
-            Rend.material = NewMat;
-        }
-        else
-        {
-            mouseOver = false;
-            Rend.material = OldMat;
+            if (Object.name == lookingAt.name)
+            {
+                mouseOver = true;
+                Rend.material = NewMat;
+            }
+            else
+            {
+                mouseOver = false;
+                Rend.material = OldMat;
+            }
+
         }
 
 

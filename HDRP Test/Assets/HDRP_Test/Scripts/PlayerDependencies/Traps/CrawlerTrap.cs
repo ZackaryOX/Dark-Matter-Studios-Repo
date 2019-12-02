@@ -54,18 +54,21 @@ public class CrawlerTrap : Trap
         CreateCrawler = IsLerping ? false : true;
     }
 
-    public void Initiate(float lerpTime)
+    public void Initiate(float lerpTime, FMOD.Studio.EventInstance damage)
     {
         if (!IsLerping)
         {
             CreateCrawler = true;
+            
+
+            MyDamageSound = damage;
             if (lerpTime > 0)
             {
                 LerpTime = lerpTime;
             }
         }
     }
-    public void Update()
+    public void Update(PhotonView trapnodeview)
     {
         if (Ghost.AllGhosts.Count > 0)
         {
@@ -78,6 +81,9 @@ public class CrawlerTrap : Trap
                 CurrentCrawler.transform.position = StartPoint;
                 CurrentCrawler.transform.eulerAngles = StartRotation;
                 CreateCrawler = false;
+
+                FMODUnity.RuntimeManager.AttachInstanceToGameObject(MyDamageSound, CurrentCrawler.GetComponent<Transform>(), CurrentCrawler.GetComponent<Rigidbody>());
+                trapnodeview.RPC("PlayAudio", RpcTarget.AllBuffered);
             }
 
             if (IsLerping)
@@ -89,7 +95,8 @@ public class CrawlerTrap : Trap
                     LerpParam = 1;
                     IsLerping = false;
                     reset = true;
-                    CurrentCrawler.SetActive(false);
+                    PhotonNetwork.Destroy(CurrentCrawler);
+                    trapnodeview.RPC("StopAudio", RpcTarget.AllBuffered);
                 }
                 CurrentCrawler.transform.position = Vector3.Lerp(StartPoint, EndPoint, LerpParam);
 
@@ -105,7 +112,7 @@ public class CrawlerTrap : Trap
                     Transform Targetstrans = Target.GetObject().transform;
                     Transform Casterstrans = CurrentCrawler.transform;
                     float Divider = 2;
-                    int layerMask = 1 << 8;
+                    int layerMask = 1 << 11;
                     layerMask = ~layerMask;
                     RaycastHit hit;
                     Vector3 Direction = Targetstrans.position - Casterstrans.position;
@@ -118,14 +125,14 @@ public class CrawlerTrap : Trap
                         if (Vector3.Angle(TargetsHeadtrans.forward, Casterstrans.position - TargetsHeadtrans.position) <= 60)
                         {
 
-                            Debug.Log("doing look");
+
                             thisFramesDamage += LookDamage * Time.deltaTime;
 
                         }
 
                         if (Distance <= AOERadius)
                         {
-                            Debug.Log("doing aoe");
+
                             thisFramesDamage += AOEDamage * Time.deltaTime;
 
                             if (Target.GetWalkSpeed() != Target.GetDefaultSpeed() / Divider)
@@ -175,8 +182,12 @@ public class CrawlerTrap : Trap
     private bool CreateCrawler = false;
     private bool IsLerping = false;
     private float LerpParam = 0;
-    private float LerpTime = 1;
-    private float LookDamage = 5.0f;
-    private float AOERadius = 10f;
-    private float AOEDamage = 5.0f;
+    private float LerpTime = 5f;
+    private float LookDamage = 12.5f;
+    private float AOERadius = 20f;
+    private float AOEDamage = 12.5f;
+    private FMOD.Studio.EventInstance MyDamageSound;
+
+
+
 }

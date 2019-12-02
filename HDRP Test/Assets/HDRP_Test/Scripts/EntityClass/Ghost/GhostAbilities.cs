@@ -35,6 +35,11 @@ abstract public class GhostAbilities
 
         return false;
     }
+
+    public float GetCoolDown()
+    {
+        return TimeTillCooldown;
+    }
 }
 
 
@@ -106,7 +111,7 @@ public class Materialise : GhostAbilities
             Transform Targetstrans = Target.GetObject().transform;
             Transform Casterstrans = Caster.GetObject().transform;
 
-            int layerMask = 1 << 8;
+            int layerMask = 1 << 11;
             layerMask = ~layerMask;
             RaycastHit hit;
             Vector3 Direction = Targetstrans.position - Casterstrans.position;
