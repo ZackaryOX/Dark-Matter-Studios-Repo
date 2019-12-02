@@ -22,13 +22,14 @@ public class ForDrawer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.E) && GetComponent<mouseHovor>().mouseOver == true)
         {
             DrawerView.RPC("DrawerInteract", RpcTarget.AllBuffered, null);
         }
+
         ThisDrawer.Update();
     }
+
 
     [PunRPC]
     public void DrawerInteract()

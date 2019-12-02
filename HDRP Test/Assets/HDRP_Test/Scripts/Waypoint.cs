@@ -8,12 +8,22 @@ public class Waypoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = Player.AllPlayers[0].GetObject();
+        
+        
     }
 
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, this.transform.position) < 1)
+        if(player == null && Player.AllPlayers.Count > 0)
+        {
+            player = Player.AllPlayers[0].GetObject();
+        }
+
+        if(Player.AllPlayers.Count == 0)
+        {
+
+        }
+        else if (Vector3.Distance(player.transform.position, this.transform.position) < 1)
         {
             Player.AllPlayers[0].AdvanceLevel();
             Player.AllPlayers[0].AdvanceLevel();

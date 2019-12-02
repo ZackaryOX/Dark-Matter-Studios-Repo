@@ -8,10 +8,14 @@ public class PlayerInput
     private Transform _Headtransform;
     private Transform _transform;
     private Animator _animator;
+    private InputManager input;
     private float lerpSmoothingTime = 0.05f;
+    private PlayerInventory inventory;
     //Constructor 
-    public PlayerInput(GameObject thisobject, GameObject tempHead)
+    public PlayerInput(GameObject thisobject, GameObject tempHead, InputManager tempInput, PlayerInventory tempInv)
     {
+        inventory = tempInv;
+        input = tempInput;
         _controller = thisobject.GetComponent<CharacterController>();
         _Headtransform = tempHead.GetComponent<Transform>();
         _transform = thisobject.GetComponent<Transform>();
@@ -60,8 +64,8 @@ public class PlayerInput
     Vector3 RotateCamera(PlayerState state)
     {
 
-        float ForYaw = state.GetLook() ? Input.GetAxis("Mouse X") : 0;
-        float ForPitch = state.GetLook() ? Input.GetAxis("Mouse Y") : 0;
+        float ForYaw = state.GetLook() ? input.GetMouseX() : 0;
+        float ForPitch = state.GetLook() ? input.GetMouseY() : 0;
 
 
 
@@ -104,7 +108,7 @@ public class PlayerInput
         if (_controller.isGrounded && !IsJumping)
         {
 
-            TempJump += GetInput(KeyCode.Space);
+            TempJump += GetInput("jump");
 
             //Was SpaceBar Pressed? If so initiate jump
             if (TempJump > 0 && playerstamina.GetStamina() >= StaminaDeduction)
@@ -121,9 +125,9 @@ public class PlayerInput
 
 
     }
-    private int GetInput(KeyCode val)
+    private int GetInput(string temp)
     {
-        if (Input.GetKey(val))
+        if (input.GetKey(temp))
         {
             return 1;
         }
@@ -172,11 +176,47 @@ public class PlayerInput
 
         return 0.0f;
     }
+    private void InventoryInput()
+    {
+        //Scroll up
+        if (input.GetScrollWheel() > 0f)
+        {
+            inventory.SelectPrevious();
+        }
+        //Scroll down
+        else if (input.GetScrollWheel() < 0f)
+        {
+            inventory.SelectNext();
+        }
+
+        if (input.GetKey("one"))
+            inventory.Select(0);
+        else if (input.GetKey("two"))
+            inventory.Select(1);
+        else if (input.GetKey("three"))
+            inventory.Select(2);
+        else if (input.GetKey("four"))
+            inventory.Select(3);
+        else if (input.GetKey("five"))
+            inventory.Select(4);
+        else if (input.GetKey("six"))
+            inventory.Select(5);
+        else if (input.GetKey("seven"))
+            inventory.Select(6);
+        else if (input.GetKey("eight"))
+            inventory.Select(7);
+        else if (input.GetKey("nine"))
+            inventory.Select(8);
+        else if (input.GetKey("zero"))
+            inventory.Select(9);
+    }
 
 
 
     public void Update(Stamina playerstam, PlayerState currentstate)
     {
+        InventoryInput();
+
         int Vertical = 0;
         int Horizontal = 0;
         int Running = 0;
@@ -186,14 +226,14 @@ public class PlayerInput
 
         if (currentstate.GetWalk())
         {
-            Vertical += GetInput(KeyCode.W);
-            Vertical -= GetInput(KeyCode.S);
-            Horizontal += GetInput(KeyCode.D);
-            Horizontal -= GetInput(KeyCode.A);
+            Vertical += GetInput("forward");
+            Vertical -= GetInput("backward");
+            Horizontal += GetInput("right");
+            Horizontal -= GetInput("left");
         }
 
         if(currentstate.GetRun() && Vertical > 0)
-        Running += GetInput(KeyCode.LeftShift);
+        Running += GetInput("run");
 
         if(currentstate.GetJump())
         ComputeJump(playerstam);
