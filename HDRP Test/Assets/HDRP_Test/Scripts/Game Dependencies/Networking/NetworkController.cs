@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NetworkController : MonoBehaviourPunCallbacks
 {
@@ -17,8 +18,10 @@ public class NetworkController : MonoBehaviourPunCallbacks
     RoomInfo ThisRoom;
     private static bool ConnectedToMaster = false;
     // Start is called before the first frame update
-    public GameObject RoundStart;
-    public GameObject RoundCancel;
+    public Text Status;
+    public GameObject JoinRoom;
+    public GameObject LeaveRoom;
+    public GameObject Room;
     public string roomname = "Room1";
     void Start()
     {
@@ -31,33 +34,37 @@ public class NetworkController : MonoBehaviourPunCallbacks
     {
         ConnectedToMaster = true;
         PhotonNetwork.AutomaticallySyncScene = true;
-        Debug.Log("We are now connected to " + PhotonNetwork.CloudRegion + " server!");
-        RoundStart.SetActive(true);
-        RoundCancel.SetActive(false);
+        Status.text = PhotonNetwork.CloudRegion + " server";
+        JoinRoom.SetActive(true);
+        LeaveRoom.SetActive(false);
     }
 
     public void OnRoundStart()
     {
-
-        RoundStart.SetActive(false);
-        RoundCancel.SetActive(true);
-        PhotonNetwork.JoinRoom(roomname);
+        if(PhotonNetwork.JoinRoom(roomname))
+        {
+            JoinRoom.SetActive(false);
+            LeaveRoom.SetActive(true);
+        }
     }
     public void OnRoundCancel()
     {
-        RoundStart.SetActive(true);
-        RoundCancel.SetActive(false);
-        PhotonNetwork.LeaveRoom();
+        if(PhotonNetwork.LeaveRoom())
+        {
+            Room.SetActive(false);
+            JoinRoom.SetActive(true);
+            LeaveRoom.SetActive(false);
+        }
     }
     private void CreateRoom(int roomName)
     {
-        Debug.Log("Room created");
-        PhotonNetwork.CreateRoom(roomname, roomOps);
-        
+        if(PhotonNetwork.CreateRoom(roomname, roomOps))
+            Debug.Log("Room created");
+
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log("joining failed, creating new room");
+        Debug.Log("Joining Failed, creating new room");
         if (ConnectedToMaster)
         {
             RoomCreated = true;
@@ -66,14 +73,12 @@ public class NetworkController : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        Debug.Log("ROOM JOINED");
+        Room.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-
         if (Input.GetKeyDown(KeyCode.J))
         {
             OnRoundStart();

@@ -17,7 +17,6 @@ public class ForDrawer : MonoBehaviour
     private float CurrentState = 0;
     void Awake()
     {
-        Debug.Log("creating drawer");
         ThisDrawer = new Drawer(OutterDrawer, gameObject);
     }
     private void Start()

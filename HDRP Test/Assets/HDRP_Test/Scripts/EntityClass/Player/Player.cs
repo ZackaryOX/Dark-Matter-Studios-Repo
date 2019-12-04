@@ -21,6 +21,7 @@ public class Player : Entity
         SetHandTarget(handtarget);
         Health = 100;
         Sanity = 100;
+        input = tempInput;
 
         if (!isEditor)
         {
@@ -111,12 +112,12 @@ public class Player : Entity
         }
     }
     
-    public void AddItemToInventory(string pickupname) {
+    public bool AddItemToInventory(string pickupname) {
         if (Mystate.GetPickup())
         {
-            Debug.Log("picking up" + this.ThisInventory.PickupItem(PickUp.AllItems[pickupname]));
-            
+            return this.ThisInventory.PickupItem(PickUp.AllItems[pickupname]);
         }
+        return false;
     }
     public bool UseItemInInventory(PickUp tempitem)
     {
@@ -188,6 +189,8 @@ public class Player : Entity
             ThisAnim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
         }
     }
+    public InputManager input;
+
     //Private
     private Dictionary<int, PlayerObserver> Observers = new Dictionary<int, PlayerObserver>();
     private float Health;

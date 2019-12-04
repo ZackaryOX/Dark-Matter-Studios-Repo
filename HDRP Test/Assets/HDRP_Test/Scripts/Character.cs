@@ -176,7 +176,7 @@ public class Character : MonoBehaviour
     }
     public void Leave()
     {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene("MainMenu");
     }
 
 
