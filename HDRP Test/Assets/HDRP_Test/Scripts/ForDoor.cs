@@ -6,7 +6,7 @@ using UnityEngine;
 public class ForDoor : MonoBehaviour
 {
     // Start is called before the first frame update
-    Door ThisDoor;
+   public Door ThisDoor;
     public GameObject Keyobject;
     PhotonView DoorView;
     private PickUp ThisKey;

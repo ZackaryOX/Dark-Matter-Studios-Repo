@@ -15,6 +15,11 @@ public class Timer : MonoBehaviour
         TimerCount++;
     }
 
+   public float ReturnTime()
+    {
+        return ElapsedTime;
+    }
+
     // Update is called once per frame
     void Update()
     {

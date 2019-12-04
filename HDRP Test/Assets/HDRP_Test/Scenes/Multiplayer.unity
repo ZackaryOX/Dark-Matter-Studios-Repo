@@ -1181,9 +1181,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff5b04370b88554b9a99a5f65bde253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoundStart: {fileID: 1335254603}
-  RoundCancel: {fileID: 479454171}
-  roomname: Room12
+  Status: {fileID: 0}
+  JoinRoom: {fileID: 0}
+  LeaveRoom: {fileID: 0}
+  Room: {fileID: 0}
+  roomname: Room2
 --- !u!4 &953592969
 Transform:
   m_ObjectHideFlags: 0
@@ -2216,6 +2218,9 @@ MonoBehaviour:
   CurrentScene: 0
   PlayersInRoom: 0
   myNumberInRoom: 0
+  players: {fileID: 0}
+  time: {fileID: 0}
+  Loading: {fileID: 0}
   startingTime: 10
 --- !u!4 &1556765728
 Transform:
