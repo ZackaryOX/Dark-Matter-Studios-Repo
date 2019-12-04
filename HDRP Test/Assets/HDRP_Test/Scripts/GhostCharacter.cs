@@ -115,6 +115,7 @@ public class GhostCharacter : MonoBehaviour
                     OldState = ThisPlayer.GetState();
                     ThisPlayer.SetState(PauseMenu);
                     Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                     menu.SetActive(true);
                 }
                 else
@@ -176,6 +177,7 @@ public class GhostCharacter : MonoBehaviour
         ThisPlayer.SetState(OldState);
         OldState = null;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void Settings()
     {

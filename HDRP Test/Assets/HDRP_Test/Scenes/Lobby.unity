@@ -956,7 +956,7 @@ MonoBehaviour:
   JoinRoom: {fileID: 1335254603}
   LeaveRoom: {fileID: 479454171}
   Room: {fileID: 1837552458}
-  roomname: Room12
+  roomname: Room2
 --- !u!4 &953592969
 Transform:
   m_ObjectHideFlags: 0
@@ -2064,7 +2064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d143d46a65bfd44399690fa0ff7c491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delaystart: 0
+  delaystart: 1
   maxplayers: 2
   menuScene: 0
   multiplayerScene: 1

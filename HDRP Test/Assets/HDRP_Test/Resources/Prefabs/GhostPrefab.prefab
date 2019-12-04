@@ -118,7 +118,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -129,7 +129,7 @@ MonoBehaviour:
           m_StringArgument: three
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -486,7 +486,7 @@ MonoBehaviour:
           m_StringArgument: eight
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -615,7 +615,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -1521,7 +1521,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -1532,7 +1532,7 @@ MonoBehaviour:
           m_StringArgument: six
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -1990,7 +1990,7 @@ RectTransform:
   m_Children:
   - {fileID: 605303738304544263}
   m_Father: {fileID: 1611911766623090271}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2600,7 +2600,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -2731,9 +2731,9 @@ Transform:
   m_LocalPosition: {x: 22.034185, y: -0.49424, z: -43.930645}
   m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
   m_Children:
+  - {fileID: 4618946497244328825}
   - {fileID: 1598366942690964304}
   - {fileID: 8001441581092120879}
-  - {fileID: 4618946497244328825}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2855,7 +2855,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -2866,7 +2866,7 @@ MonoBehaviour:
           m_StringArgument: use
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -2995,7 +2995,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Leave
         m_Mode: 1
         m_Arguments:
@@ -3417,7 +3417,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: SetSFXVolume
         m_Mode: 0
         m_Arguments:
@@ -3654,7 +3654,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -3665,7 +3665,7 @@ MonoBehaviour:
           m_StringArgument: zero
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -4573,7 +4573,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -4584,7 +4584,7 @@ MonoBehaviour:
           m_StringArgument: two
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -4796,7 +4796,7 @@ RectTransform:
   - {fileID: 1715828917029724399}
   - {fileID: 4904900378205658627}
   m_Father: {fileID: 1611911766623090271}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5091,7 +5091,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Settings
         m_Mode: 1
         m_Arguments:
@@ -5770,7 +5770,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Settings
         m_Mode: 1
         m_Arguments:
@@ -6083,7 +6083,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -6094,7 +6094,7 @@ MonoBehaviour:
           m_StringArgument: five
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -6351,7 +6351,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -6362,7 +6362,7 @@ MonoBehaviour:
           m_StringArgument: jump
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -6568,7 +6568,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -6579,7 +6579,7 @@ MonoBehaviour:
           m_StringArgument: interact
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -7214,7 +7214,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -7225,7 +7225,7 @@ MonoBehaviour:
           m_StringArgument: nine
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -7354,7 +7354,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -7365,7 +7365,7 @@ MonoBehaviour:
           m_StringArgument: backward
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -7933,7 +7933,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Menu
         m_Mode: 1
         m_Arguments:
@@ -8376,7 +8376,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -8387,7 +8387,7 @@ MonoBehaviour:
           m_StringArgument: right
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -8805,7 +8805,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
@@ -9103,7 +9103,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
@@ -9367,7 +9367,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -9378,7 +9378,7 @@ MonoBehaviour:
           m_StringArgument: run
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -9692,7 +9692,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Keybinds
         m_Mode: 1
         m_Arguments:
@@ -10251,7 +10251,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -10262,7 +10262,7 @@ MonoBehaviour:
           m_StringArgument: left
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -10391,7 +10391,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -10402,7 +10402,7 @@ MonoBehaviour:
           m_StringArgument: seven
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -10982,7 +10982,7 @@ Transform:
   - {fileID: 6469135900871122629}
   - {fileID: 4049462929810358242}
   m_Father: {fileID: 1611911766623090271}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!95 &5536406049338517636
 Animator:
@@ -11108,6 +11108,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: IsWalking
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsPicking
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsRunning
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0
@@ -11216,7 +11222,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: SetMusicVolume
         m_Mode: 0
         m_Arguments:
@@ -11850,7 +11856,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -11861,7 +11867,7 @@ MonoBehaviour:
           m_StringArgument: one
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -12101,7 +12107,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: SetMasterVolume
         m_Mode: 0
         m_Arguments:
@@ -13095,7 +13101,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -13106,7 +13112,7 @@ MonoBehaviour:
           m_StringArgument: four
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -13308,7 +13314,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: ResetKeys
         m_Mode: 1
         m_Arguments:
@@ -13551,7 +13557,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Menu
         m_Mode: 1
         m_Arguments:
@@ -13784,7 +13790,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: RebindKey
         m_Mode: 5
         m_Arguments:
@@ -13795,7 +13801,7 @@ MonoBehaviour:
           m_StringArgument: forward
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: StoreText
         m_Mode: 2
         m_Arguments:
@@ -13954,7 +13960,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Audio
         m_Mode: 1
         m_Arguments:
@@ -15209,7 +15215,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2315087896062064100}
         m_MethodName: Settings
         m_Mode: 1
         m_Arguments:
