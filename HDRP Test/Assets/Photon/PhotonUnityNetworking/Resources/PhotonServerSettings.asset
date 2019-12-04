@@ -45,5 +45,14 @@ MonoBehaviour:
   - DoorInteract
   - DoorUnlock
   - AwakePickup
+  - SetCasterTransparency
+  - SetTargetSanity
+  - SetTargetSpeed
+  - SetCasterSpeed
+  - UpdateSanity
+  - PlayAudio
+  - StopAudio
+  - PlayGhostAudio
+  - StopGhostAudio
   DisableAutoOpenWizard: 1
   ShowSettings: 1

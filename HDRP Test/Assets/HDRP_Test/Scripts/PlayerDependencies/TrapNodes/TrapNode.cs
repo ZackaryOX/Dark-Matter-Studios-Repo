@@ -9,8 +9,14 @@ public class TrapNode : MonoBehaviour
     {
 
     }
+    public virtual void ActivateTrap()
+    {
+
+    }
     //PUBLIC:
     //PRIVATE:
     Vector3 Position;
     Trap Slot;
+    //PROTECTED:
+    protected bool isActive;
 }

@@ -18,9 +18,13 @@ public class GhostCharacter : MonoBehaviour
     public Text SlotNumber;
     public Image StaminaBar;
     public Image HealthBar;
+    public GameObject Surfaces;
+    public GameObject Sheet;
     GhostInventory hotbar;
     GhostStatObserver Player1Stats;
     GhostScoreObserver Player1Score;
+
+    public Sprite CrawlerIcon;
 
     private InputManager input;
     private PausedState PauseMenu;
@@ -32,6 +36,10 @@ public class GhostCharacter : MonoBehaviour
     public GameObject audiosettings;
     public GameObject keybinds;
     public GameObject confirmation;
+    public GameObject UIElements;
+    private bool DoorsDeleted = false;
+
+    public Materialise TestAbility;
 
     [FMODUnity.EventRef]
     public string[] SFXEventNames;
@@ -39,15 +47,32 @@ public class GhostCharacter : MonoBehaviour
     [FMODUnity.EventRef]
     public string[] MusicEventNames;
 
+    [FMODUnity.EventRef]
+    public string AbilityAudio;
+    FMOD.Studio.EventInstance AbilityInstance;
     void Awake()
     {
         PauseMenu = new PausedState();
         PV = GetComponent<PhotonView>();
+        UIElements.SetActive(false);
         PlayerAwake();
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 144;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
-    }
 
+
+
+
+        ThisPlayer.AddRenderer(Surfaces.GetComponent<SkinnedMeshRenderer>());
+        ThisPlayer.AddRenderer(Sheet.GetComponent<SkinnedMeshRenderer>());
+        ThisPlayer.SetTransparency(0.2f);
+
+       
+    }
+    private void Start()
+    {
+        AbilityInstance = FMODUnity.RuntimeManager.CreateInstance(AbilityAudio);
+        FMODUnity.RuntimeManager.AttachInstanceToGameObject(AbilityInstance, head.GetComponent<Transform>(), head.GetComponent<Rigidbody>());
+    }
     void Update()
     {
 
@@ -55,8 +80,34 @@ public class GhostCharacter : MonoBehaviour
 
     void LateUpdate()
     {
-        if (PV.IsMine)
+        
+        if(Player.AllPlayers.Count == 0)
         {
+            Debug.Log("waiting for players");
+        }
+        else if (TestAbility == null && Player.AllPlayers.Count > 0)
+        {
+            float LookDamage = 7.5f;
+            float AOEDamage = 7.5f;
+            float AOERadius = 10f;
+            float Cooldown = 10.0f;
+            float ActiveTime = 5.0f;
+
+            TestAbility = new Materialise(ThisPlayer, Player.AllPlayers[0], Cooldown, ActiveTime, AOERadius, AOEDamage, LookDamage);
+            Debug.Log("setting ability");
+        }
+        else if (PV.IsMine)
+        {
+            if (!DoorsDeleted && Door.AllDoors.Count > 0)
+            {
+                DoorsDeleted = true;
+
+                foreach (KeyValuePair<string, Door> entry in Door.AllDoors )
+                {
+                    Destroy(entry.Value.GetObject().GetComponent<MeshCollider>());
+                    Debug.Log("deleting door colliders");
+                }
+            }
             if (input.GetKeyDown("escape"))
             {
                 if (OldState == null)
@@ -71,15 +122,22 @@ public class GhostCharacter : MonoBehaviour
                     Resume();
                 }
             }
-
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                TestAbility.Activate();
+            }
             ThisPlayer.Update();
             hotbar.Update();
             input.Update();
+            Sheet.SetActive(false);
             MyCamera.SetActive(true);
             MyFBOCam.SetActive(true);
+            UIElements.SetActive(true);
             Vector2 Data = Player1Stats.GetData();
             StaminaBar.transform.localScale = new Vector3(Data.y / 100, 1, 1);
             HealthBar.transform.localScale = new Vector3(Data.x / 100, 1, 1);
+            TestAbility.Update(PV);
+
         }
 
     }
@@ -151,7 +209,7 @@ public class GhostCharacter : MonoBehaviour
     }
     public void Leave()
     {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene("MainMenu");
     }
 
 
@@ -169,11 +227,49 @@ public class GhostCharacter : MonoBehaviour
         /*FOR TUTORIAL:*///ThisPlayer.SetState(new TeachWalkState());
         /*FOR EDITING:*/ThisPlayer.SetState(new TeachPickupState());
 
+        CrawlerTrap crawlertemp = new CrawlerTrap();
+        hotbar.AddTrap(crawlertemp, CrawlerIcon);
     }
     [PunRPC]
     void SetPosition()
     {
         Debug.Log("THIS IS HOW MANY PLAYERS: " + Player.AllPlayers.Count + " FROM PLAYER " + ThisPlayer.GetName());
         //Player1.SetPosition(GameObject.Find("Spawn0").transform.position);
+    }
+
+    [PunRPC]
+    public void SetCasterTransparency(float albedo)
+    {
+        Ghost.AllGhosts[0].SetTransparency(albedo);
+    }
+
+    [PunRPC]
+    public void SetTargetSanity(float newSanity)
+    {
+         Player.AllPlayers[0].SetSanity(newSanity);
+    }
+
+    [PunRPC]
+    public void SetTargetSpeed(float newspeed)
+    {
+        Player.AllPlayers[0].SetWalkSpeed(newspeed);
+    }
+
+    [PunRPC]
+    public void SetCasterSpeed(float newspeed)
+    {
+        Ghost.AllGhosts[0].SetWalkSpeed(newspeed);
+    }
+
+    [PunRPC]
+    public void PlayGhostAudio()
+    {
+        AbilityInstance.start();
+    }
+
+    [PunRPC]
+    public void StopGhostAudio()
+    {
+        AbilityInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 }

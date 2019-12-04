@@ -8,15 +8,17 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     Text GameTime;
     public static float ElapsedTime = 0;
+    static float TimerCount = 0;
     void Start()
     {
         GameTime = GetComponent<Text>();
+        TimerCount++;
     }
 
     // Update is called once per frame
     void Update()
     {
-        ElapsedTime += Time.deltaTime;
+        ElapsedTime += Time.deltaTime/TimerCount;
 
         int Minute = (int)ElapsedTime / 60;
         int Second = (int)ElapsedTime - (Minute * 60);

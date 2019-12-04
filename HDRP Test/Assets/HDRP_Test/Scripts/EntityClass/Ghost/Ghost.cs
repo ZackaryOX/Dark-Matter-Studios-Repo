@@ -23,9 +23,17 @@ public class Ghost : Entity
             GhostNumber = Ghosts;
             Ghosts++;
             AllGhosts.Add(GhostNumber, this);
+            Added = true;
         }
     }
 
+    ~Ghost()
+    {
+        if (Added)
+        {
+            AllGhosts.Remove(GhostNumber);
+        }
+    }
 
     //Public
     public float GetStamina()
@@ -80,15 +88,58 @@ public class Ghost : Entity
     {
         return Health;
     }
+    public GameObject GetHead()
+    {
+        return Head;
+    }
+    public int GetGhostNumber()
+    {
+        return this.GhostNumber;
+    }
+    public void AddRenderer(SkinnedMeshRenderer temp)
+    {
+        MyRenderers.Add(temp);
+    }
+    public Trap GetTrap()
+    {
+        if (this.ThisInventory.GetTrap() == null)
+            return null;
 
+        return ThisInventory.GetTrap();
+    }
+
+    public void SetTransparency(float albedo)
+    {
+        foreach (SkinnedMeshRenderer entry in MyRenderers)
+        {
+            Color tempcolor = entry.material.GetColor("_BaseColor");
+            tempcolor.a = albedo;
+            entry.material.SetColor("_BaseColor", tempcolor);
+        }
+    }
+    public void SetWalkSpeed(float temp)
+    {
+        ThisInput.SetWalkSpeed(temp);
+    }
+    public float GetWalkSpeed()
+    {
+        return ThisInput.GetWalkSpeed();
+    }
+
+    public float GetDefaultSpeed()
+    {
+        return ThisInput.GetDefaultSpeed();
+    }
     //Private
     private Dictionary<int, GhostObserver> Observers = new Dictionary<int, GhostObserver>();
+    private List<SkinnedMeshRenderer> MyRenderers = new List<SkinnedMeshRenderer>();
     private float TutorialScore = 0;
     private GhostInput ThisInput;
     private float Health;
     PlayerState Mystate;
     private int GhostNumber = 0;
     private GhostInventory ThisInventory;
+    private bool Added = false;
     private GameObject Head;
     private Stamina ThisStamina;
 }

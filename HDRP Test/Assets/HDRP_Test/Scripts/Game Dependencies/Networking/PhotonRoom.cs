@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
@@ -20,6 +21,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public int myNumberInRoom;
 
     public static int playersInGame = 0;
+
+    public Text players;
+    public Text time;
+    public GameObject Loading;
 
     //Delayed Start
     private bool readyToCount;
@@ -92,13 +97,15 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
                     lessThanMaxPlayers -= Time.deltaTime;
                     timeToStart = lessThanMaxPlayers;
                 }
-                Debug.Log("Time Remaining before game starts " + timeToStart);
+                time.text = timeToStart.ToString();
                 if(timeToStart <= 0)
                 {
                     StartGame();
                 }
             }
         }
+        if(players != null)
+            players.text = PlayersInRoom + "/" + MultiplayerSettings.multiplayerSettings.maxplayers;
     }
 
     public override void OnJoinedRoom()
@@ -111,7 +118,6 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         PhotonNetwork.NickName = myNumberInRoom.ToString();
         if (MultiplayerSettings.multiplayerSettings.delaystart)
         {
-            Debug.Log("Players in room out of max players possible (" + PlayersInRoom +":"+MultiplayerSettings.multiplayerSettings.maxplayers + ")");
             if(PlayersInRoom >= 1)
             {
                 readyToCount = true;
@@ -133,12 +139,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
-        Debug.Log("A new player has joined the room");
         photonplayers = PhotonNetwork.PlayerList;
         PlayersInRoom++;
         if (MultiplayerSettings.multiplayerSettings.delaystart)
         {
-            Debug.Log("Players in room out of max players possible (" + PlayersInRoom + ":" + MultiplayerSettings.multiplayerSettings.maxplayers + ")");
             if (PlayersInRoom > 1)
             {
                 readyToCount = true;
@@ -162,6 +166,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
         {
             PhotonNetwork.CurrentRoom.IsOpen = false;
         }
+        Loading.SetActive(true);
         PhotonNetwork.LoadLevel(MultiplayerSettings.multiplayerSettings.multiplayerScene);
     }
     void RestartTimer()
@@ -180,7 +185,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
             IsGameLoaded = true;
             if (MultiplayerSettings.multiplayerSettings.delaystart)
             {
-                PV.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
+                //PV.RPC("RPC_LoadedGameScene", RpcTarget.MasterClient);
+                RPC_CreatePlayer();
             }
             else
             {
@@ -205,11 +211,21 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks
     private void RPC_CreatePlayer()
     {
         //Debug.Log("SERVER PLAYER NUMBER: " + PhotonRoom.playersInGame);
-        
-        GameObject tempobj = GameObject.Find("Spawn" + PhotonNetwork.CountOfPlayersInRooms);
 
-        
-        PhotonNetwork.Instantiate(Path.Combine("Prefabs", "PlayerPrefab"), tempobj.transform.position, tempobj.transform.rotation, 0);
+        Debug.Log("MYNUMBER: " + myNumberInRoom);
+        if(myNumberInRoom == 1/*PhotonNetwork.CountOfPlayersInRooms == 0*/)
+        {
+            GameObject tempobj = GameObject.Find("Spawn0");
+
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "PlayerPrefab"), tempobj.transform.position, tempobj.transform.rotation, 0);
+        }
+        else
+        {
+            GameObject tempobj = GameObject.Find("Spawn1");
+
+            PhotonNetwork.Instantiate(Path.Combine("Prefabs", "GhostPrefab"), tempobj.transform.position, tempobj.transform.rotation, 0);
+        }
+       
 
         PlayersInRoom++;
         

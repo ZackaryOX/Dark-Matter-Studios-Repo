@@ -74,7 +74,7 @@ public class QuestManager : MonoBehaviour
     void Update()
     {
         //Remove quest if completed
-        if (Quests[0].getCompletion() == true)
+        if (Quests.Count > 0 && Quests[0].getCompletion() == true)
         {
             Quests.RemoveAt(0);
             Images[0].transform.localPosition = new Vector3(-1000, -1000, 0);

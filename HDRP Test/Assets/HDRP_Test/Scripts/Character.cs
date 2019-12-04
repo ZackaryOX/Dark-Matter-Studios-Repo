@@ -27,12 +27,15 @@ public class Character : MonoBehaviour
     private PausedState PauseMenu;
     private PlayerState OldState;
     public AudioManager ThisAudioManager;
-
+    private bool PlayedMusic = false;
+    private bool DeletedDoors = false;
+    public GameObject HandTarget;
     public GameObject menu;
     public GameObject settings;
     public GameObject audiosettings;
     public GameObject keybinds;
     public GameObject confirmation;
+    public GameObject UIElements;
 
     [FMODUnity.EventRef]
     public string[] SFXEventNames;
@@ -44,9 +47,12 @@ public class Character : MonoBehaviour
     {
         PauseMenu = new PausedState();
         PV = GetComponent<PhotonView>();
+        UIElements.SetActive(false);
         PlayerAwake();
-        Application.targetFrameRate = 60;
+        //PV.RPC("PlayerAwake", RpcTarget.AllBuffered);
+        Application.targetFrameRate = 144;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
+        Debug.Log("CHARACTER CREATED");
     }
 
     void Update()
@@ -54,11 +60,26 @@ public class Character : MonoBehaviour
                
     }
 
+    void OnAnimatorIK()
+    {
+        if (PV.IsMine)
+        {
+            ThisPlayer.PutHandOut();
+        }
+    }
+
+
     void LateUpdate()
     {
-        if (PV.IsMine )
+        if (PV.IsMine)
         {
-            if (input.GetKey("escape"))
+           
+            if (!PlayedMusic)
+            {
+                PlayedMusic = true;
+                ThisAudioManager.PlayMusic();
+            }
+            if (input.GetKeyDown("escape"))
             {
                 if (OldState == null)
                 {
@@ -78,11 +99,12 @@ public class Character : MonoBehaviour
             input.Update();
             MyCamera.SetActive(true);
             MyFBOCam.SetActive(true);
+            UIElements.SetActive(true);
             Vector3 Data = Player1Stats.GetData();
             StaminaBar.transform.localScale = new Vector3(Data.y / 100, 1, 1);
             HealthBar.transform.localScale = new Vector3(Data.x / 100, 1, 1);
             SanityBar.transform.localScale = new Vector3(Data.z / 100, 1, 1);
-            ThisAudioManager.Update(100 - Data.z);
+            ThisAudioManager.Update(Data.z);
         }
         
     }
@@ -154,7 +176,7 @@ public class Character : MonoBehaviour
     }
     public void Leave()
     {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        SceneManager.LoadScene("MainMenu");
     }
 
 
@@ -166,16 +188,16 @@ public class Character : MonoBehaviour
         hotbar = new PlayerInventory(defaultIcon, selectedIcon, emptyItem, SlotNumber);
         MyCamera.SetActive(false);
         MyFBOCam.SetActive(false);
-        ThisPlayer = new Player(gameObject, head, hotbar, false, input);
+        ThisPlayer = new Player(gameObject, head, hotbar, false, input, HandTarget);
         Player1Stats = new StatObserver(ThisPlayer);
         Player1Score = new ScoreObserver(ThisPlayer);
        /*FOR TUTORIAL:*/ //Player1.SetState(new TeachWalkState());
        /*FOR EDITING:*/  ThisPlayer.SetState(new TeachPickupState());
     }
     [PunRPC]
-    void SetPosition()
+    void UpdatePlayer(float Sanity, float health)
     {
-        Debug.Log("THIS IS HOW MANY PLAYERS: " + Player.AllPlayers.Count+  " FROM PLAYER " + ThisPlayer.GetName());
-        //Player1.SetPosition(GameObject.Find("Spawn0").transform.position);
+        ThisPlayer.SetSanity(Sanity);
+        ThisPlayer.SetHealth(health);
     }
 }
