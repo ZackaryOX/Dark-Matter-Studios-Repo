@@ -71,7 +71,7 @@ public class Character : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!PV.IsMine)
+        if (PV.IsMine)
         {
            
             if (!PlayedMusic)

@@ -18,6 +18,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-9134245024251615669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Drawer/State
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-8087493279410646405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +261,24 @@ MonoBehaviour:
   Max: 100
   Default: 0
   Exists: 0
+--- !u!114 &-5379987014510776308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/Test/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637109050500346845
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-5333820644109952215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +379,7 @@ MonoBehaviour:
   Path: event:/SFX/CrawlerDamage
   guid: 0819c3b8907b6d4b8d712fb3eeab306e
   Banks:
-  - {fileID: 563658762611835434}
+  - {fileID: 5814101253070918556}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -352,6 +387,23 @@ MonoBehaviour:
   MinDistance: 10000
   MaxDistance: 10000
   Length: 35156
+--- !u!114 &-4224355966550361193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Drawer/State
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-4216623666179082063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +507,23 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-3576922004323566380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SanityMusic/Sanity
+  m_EditorClassIdentifier: 
+  Name: Sanity
+  Min: 0
+  Max: 100
+  Default: 0
+  Exists: 1
 --- !u!114 &-3530261579004754917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,12 +627,12 @@ MonoBehaviour:
   Path: event:/SFX/Drawer
   guid: ef534c89ce79344993d9a30e532c0393
   Banks:
-  - {fileID: 563658762611835434}
+  - {fileID: 5814101253070918556}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -1332069527046629723}
+  - {fileID: -4224355966550361193}
   MinDistance: 8
   MaxDistance: 90
   Length: 2520
@@ -582,12 +651,12 @@ MonoBehaviour:
   Path: event:/SFX/Door
   guid: 6f0ef2d9b456b94584529989ea115191
   Banks:
-  - {fileID: 563658762611835434}
+  - {fileID: 5814101253070918556}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 6330948312476564978}
+  - {fileID: -2070583961387317605}
   MinDistance: 8
   MaxDistance: 86.5
   Length: 3500
@@ -678,6 +747,40 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-2227209912800020010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Door/State
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &-2070583961387317605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Door/State
+  m_EditorClassIdentifier: 
+  Name: State
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &-1856270915801444628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,7 +885,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &-1228579364380150366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -924,7 +1027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 8093926214555539286}
-  - {fileID: 563658762611835434}
+  - {fileID: 5814101253070918556}
   EditorEvents:
   - {fileID: -2993041141096622188}
   - {fileID: 9200518973089521287}
@@ -933,10 +1036,10 @@ MonoBehaviour:
   - {fileID: 3908315827909138056}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 563658762611835434}
+  - {fileID: 5814101253070918556}
   StringsBanks:
   - {fileID: 8093926214555539286}
-  stringsBankWriteTime: 637109042065566420
+  stringsBankWriteTime: 637109050500000000
   cacheVersion: 3
 --- !u!114 &203675441762407728
 MonoBehaviour:
@@ -1042,7 +1145,7 @@ MonoBehaviour:
   lastModified: 637109042065476539
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &583897072456502060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1323,7 +1426,7 @@ MonoBehaviour:
   Path: event:/SFX/GhostDamage
   guid: 3f2ff34964848247b8a4d7fbeb4b0eae
   Banks:
-  - {fileID: 563658762611835434}
+  - {fileID: 5814101253070918556}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -1539,7 +1642,7 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
---- !u!114 &6159146783904801278
+--- !u!114 &5785675088111668456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1556,6 +1659,41 @@ MonoBehaviour:
   Max: 100
   Default: 0
   Exists: 1
+--- !u!114 &5814101253070918556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/FMOD/Test/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637109050520000000
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &6159146783904801278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SanityMusic/Sanity
+  m_EditorClassIdentifier: 
+  Name: Sanity
+  Min: 0
+  Max: 100
+  Default: 0
+  Exists: 0
 --- !u!114 &6330948312476564978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1572,7 +1710,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &6549389341666061808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1884,7 +2022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD/Test/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637109042065566420
+  lastModified: 637109050500000000
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -2008,12 +2146,12 @@ MonoBehaviour:
   Path: event:/Music/SanityMusic
   guid: 0d656d8ecc79614883b2bcbad81b971e
   Banks:
-  - {fileID: 563658762611835434}
+  - {fileID: 5814101253070918556}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 6159146783904801278}
+  - {fileID: -3576922004323566380}
   MinDistance: 0
   MaxDistance: 0
   Length: 51000

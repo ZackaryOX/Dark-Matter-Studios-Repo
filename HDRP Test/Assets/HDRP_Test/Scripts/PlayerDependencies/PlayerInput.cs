@@ -292,9 +292,15 @@ public class PlayerInput
             _animator.SetBool("IsWalking", true);
 
         }
+        else if (Horizontal != 0 || Vertical != 0)
+        {
+            _animator.SetBool("IsWalking", true);
+
+        }
         else
         {
             _animator.SetBool("IsWalking", false);
+
         }
 
         Vector3 VerticalMovement = _Headtransform.forward * VerticalVelocity;
