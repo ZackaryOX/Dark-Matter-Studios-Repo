@@ -52755,7 +52755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Keyobject: {fileID: 1835194921899544589}
-  locked: 0
+  locked: 1
   musicEventName: event:/SFX/Door
 --- !u!23 &4347036427415800609
 MeshRenderer:

@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 public class PluginTesterScript : MonoBehaviour
 {
     
-    Door Obj;
     Timer T;
     bool check = false;
     const string DLL_NAME = "Tutorial DLL";
@@ -29,12 +28,16 @@ public class PluginTesterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if(Door.AllDoors[GetComponent<ForDoor>().ThisDoor.GetName()].GetIsOpened() == true && check == false)
+        Debug.Log("DOORS NAME: " + gameObject.name);
+        if (Door.AllDoors.Count > 0)
         {
-            writeTime(T.ReturnTime());
+            Debug.Log(Door.AllDoors["Door0"].GetName());
+        }
+        if (Door.AllDoors.Count > 0 && Door.AllDoors[gameObject.name].GetIsOpened() == true && check == false)
+        {
+            writeTime(Timer.ElapsedTime);
             check = true;
-            Debug.Log(T.ReturnTime());
+            Debug.Log(Timer.ElapsedTime);
         }
 
         if (Input.GetKey(KeyCode.N))

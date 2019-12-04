@@ -9636,7 +9636,6 @@ GameObject:
   - component: {fileID: 3867005459779622469}
   - component: {fileID: 3429024276960983993}
   - component: {fileID: 7339154908013970241}
-  - component: {fileID: 435989623286120395}
   - component: {fileID: 4007855259719673958}
   m_Layer: 0
   m_Name: PlayerCamera
@@ -9815,18 +9814,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookingAt: 
   displayObject: 
---- !u!114 &435989623286120395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5308076184886996182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cac2cea3c5e9d24cbc626a26357e432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4007855259719673958
 MonoBehaviour:
   m_ObjectHideFlags: 0
