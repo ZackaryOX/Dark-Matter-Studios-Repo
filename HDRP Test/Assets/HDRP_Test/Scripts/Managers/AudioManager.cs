@@ -86,16 +86,22 @@ public class AudioManager
             tempinstance.start();
         }
     }
+
+    public void PlayMusic()
+    {
+        for(int i = 0; i < MusicEventInstances.Count; i++)
+        {
+            AttachInstance(MusicEventInstances[i], HeadObject);
+            MusicEventInstances[i].start();
+            
+        }
+       
+
+    }
     // Update is called once per frame
     public void Update(float PlayerSanity)
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            AttachInstance(MusicEventInstances[0], HeadObject);
-            MusicEventInstances[0].start();
-            MusicEventInstances[0].setParameterByName("Sanity", PlayerSanity);
-
-        }
+        MusicEventInstances[0].setParameterByName("Sanity", PlayerSanity);
         MusicBus.setVolume(MusicVolume);
         SFXBus.setVolume(SFXVolume);
         MasterBus.setVolume(MasterVolume);

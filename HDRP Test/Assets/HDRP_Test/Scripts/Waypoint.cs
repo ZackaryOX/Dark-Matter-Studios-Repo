@@ -8,20 +8,26 @@ public class Waypoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = Player.AllPlayers[0].GetObject();
+        
+        
     }
 
     void Update()
     {
-        if(player == null && Player.AllPlayers.Count > 0)
+
+
+        if(Player.AllPlayers.Count == 0)
+        {
+
+        }
+        else if (player == null && Player.AllPlayers.Count > 0)
         {
             player = Player.AllPlayers[0].GetObject();
         }
-        else if (Vector3.Distance(player.transform.position, this.transform.position) < 1)
+        else if (player && Vector3.Distance(player.transform.position, this.transform.position) < 3)
         {
             Player.AllPlayers[0].AdvanceLevel();
             Player.AllPlayers[0].AdvanceLevel();
-            UIManager.PlayerStateUI++;
             this.gameObject.SetActive(false);
         }
     }

@@ -1589,6 +1589,11 @@ MonoBehaviour:
   StaminaBar: {fileID: 8466399145639204049}
   HealthBar: {fileID: 8466399147462735684}
   SanityBar: {fileID: 8466399145770891465}
+  SlotNumber: {fileID: 0}
+  TestBox: {fileID: 0}
+  UIElements: {fileID: 0}
+  SFXEventNames: []
+  MusicEventNames: []
 --- !u!143 &8466399146446373020
 CharacterController:
   m_ObjectHideFlags: 0

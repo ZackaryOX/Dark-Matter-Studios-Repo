@@ -150,7 +150,17 @@ public class PlayerInventory : Inventory
             Items[selected].SetRotationEuler(GameObject.Find("mixamorig:RightHandIndex1").transform.rotation.eulerAngles);
         }
     }
-
+    public bool IsItemInHand()
+    {
+        if(Items[selected] == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
 
     private List<PickUp> Items = new List<PickUp>() { };
 }
@@ -192,14 +202,14 @@ public class GhostInventory : Inventory
     {
         return Traps[selected];
     }
-    public void AddTrap(Trap temp)
+    public void AddTrap(Trap temp,Sprite icontemp)
     {
         for (int i = 0; i < 10; i++)
         {
             if (Traps[i] == null)
             {
                 Traps[i] = temp;
-                //ItemIcons[i].GetComponent<Image>().sprite = Items[i].GetIcon();
+                ItemIcons[i].GetComponent<Image>().sprite = icontemp;
                 break;
             }
         }

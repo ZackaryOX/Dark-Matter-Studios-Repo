@@ -6,7 +6,7 @@ using UnityEngine;
 public class ForDoor : MonoBehaviour
 {
     // Start is called before the first frame update
-    Door ThisDoor;
+   public Door ThisDoor;
     public GameObject Keyobject;
     PhotonView DoorView;
     private PickUp ThisKey;
@@ -29,12 +29,11 @@ public class ForDoor : MonoBehaviour
     {
         //Instantiate the FMOD instance
         musiceventinstance = FMODUnity.RuntimeManager.CreateInstance(musicEventName);
-
         //Attach the event to the object
         FMODUnity.RuntimeManager.AttachInstanceToGameObject(musiceventinstance, GetComponent<Transform>(), GetComponent<Rigidbody>());
 
 
-
+        if(locked == true)
         ThisKey = PickUp.AllItems[Keyobject.name];
         
         ThisDoor.SetKey(ThisKey);
@@ -51,7 +50,7 @@ public class ForDoor : MonoBehaviour
 
             
         }
-        else if (ThisKey.GetPicked() == true && GetComponent<mouseHovor>().mouseOver == true && Input.GetKeyDown(KeyCode.Mouse0))
+        else if (locked && ThisKey.GetPicked() == true && GetComponent<mouseHovor>().mouseOver == true && Input.GetKeyDown(KeyCode.Mouse0))
         {
             if (Player.AllPlayers[0].UseItemInInventory(ThisKey))
             {

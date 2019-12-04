@@ -9,7 +9,7 @@ public class mouseHovor : MonoBehaviour
     public Material NewMat;
     public GameObject Object;
     public GameObject lookingAt;
-    private Vector3 origRotation;
+
 
     MeshRenderer Rend;
     Material OldMat;
@@ -21,79 +21,47 @@ public class mouseHovor : MonoBehaviour
 
     void Awake()
     {
-        //ObjectMoving = this.gameObject;
         Rend = GetComponent<MeshRenderer>();
         OldMat = Rend.material;
+        Object = gameObject;
     }
 
-    float ReturnGridPos(float x)
-    {
-        float gridtolockto = 0.25f;
-
-        float posToSet = x;
-
-        if (posToSet > 0)
-        {
-            posToSet /= gridtolockto;
-            posToSet += 0.5f;
-            float roundedX = (int)posToSet;
-            roundedX *= gridtolockto;
-            posToSet = roundedX;
-        }
-        else if (posToSet < 0)
-        {
-            posToSet /= gridtolockto;
-            posToSet -= 0.5f;
-            float roundedX = (int)posToSet;
-            roundedX *= gridtolockto;
-            posToSet = roundedX;
-        }
-
-        return posToSet;
-    }
+   
 
     void Update()
     {
-        lookingAt = GameObject.Find(rayFromCamera.lookingAt);
-
-
-        if (mouseOver && !MovingStuff)
+        if(Player.AllPlayers.Count > 0)
         {
-
-            Rend.material = NewMat;
-            if (Input.GetKey(KeyCode.E))
+            if(Player.AllPlayers[0].GetObject().GetComponentInChildren<rayFromCamera>() == null)
             {
-                //MovingStuff = true;
-                //ObjectMoving = lookingAt;
 
             }
+            else
+            {
+                lookingAt = GameObject.Find(Player.AllPlayers[0].GetObject().GetComponentInChildren<rayFromCamera>().lookingAt);
+            }
+            
         }
 
-
-
-    }
-
-    void OnMouseOver()
-    {
-        lookingAt = GameObject.Find(rayFromCamera.lookingAt);
-        mouseOver = true;
-
-
-
-    }
-
-
-
-    void OnMouseExit()
-    {
-
-        mouseOver = false;
-        if (!MovingStuff)
+        if (lookingAt)
         {
-            Rend.material = OldMat;
+            if (Object.name == lookingAt.name)
+            {
+                mouseOver = true;
+                Rend.material = NewMat;
+            }
+            else
+            {
+                mouseOver = false;
+                Rend.material = OldMat;
+            }
+
         }
 
 
+
+
     }
+
 
 }

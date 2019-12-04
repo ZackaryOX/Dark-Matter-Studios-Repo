@@ -10,7 +10,7 @@ public class Drawer : Interactable
     {
         ThisDrawer = drawer;
         ClosePosition = drawer.transform.position;
-        OpenPosition = ClosePosition + new Vector3(1, 0, 0);
+        OpenPosition = ClosePosition + new Vector3(3, 0, 0);
         DrawerName = "Drawer" + ID;
         this.ThisObject.transform.parent.name = DrawerName;
         AllDrawers.Add(DrawerName, this);
@@ -65,7 +65,10 @@ public class Drawer : Interactable
     }
 
 
-
+    public bool GetIsOpen()
+    {
+        return Open;
+    }
 
     private GameObject ThisDrawer;
     Vector3 OpenPosition;

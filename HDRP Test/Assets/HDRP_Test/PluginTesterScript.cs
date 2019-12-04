@@ -6,8 +6,8 @@ using System.Runtime.InteropServices;
 
 public class PluginTesterScript : MonoBehaviour
 {
-
-    public GameObject Obj;
+    
+    Timer T;
     bool check = false;
     const string DLL_NAME = "Tutorial DLL";
 
@@ -20,10 +20,35 @@ public class PluginTesterScript : MonoBehaviour
     [DllImport(DLL_NAME)]
     private static extern void deleteLogs();
 
+    void Start()
+    {
+        
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log("DOORS NAME: " + gameObject.name);
+        if (Door.AllDoors.Count > 0)
+        {
+            Debug.Log(Door.AllDoors["Door0"].GetName());
+        }
+        if (Door.AllDoors.Count > 0 && Door.AllDoors[gameObject.name].GetIsOpened() == true && check == false)
+        {
+            writeTime(Timer.ElapsedTime);
+            check = true;
+            Debug.Log(Timer.ElapsedTime);
+        }
+
+        if (Input.GetKey(KeyCode.N))
+        {
+            writeTime(T.ReturnTime());
+        }
+
+        if (Input.GetKey(KeyCode.Z))
+        {
+            Debug.Log(readTime());
+        }
 
 
     }

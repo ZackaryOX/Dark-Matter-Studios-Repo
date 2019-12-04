@@ -22,12 +22,18 @@ public class Editor : MonoBehaviour
 
     int layerMask = 1 << 8;
 
+    public GameObject HandTarget;
     private InputManager input;
     private PausedState PauseMenu;
     private PlayerState OldState;
     public AudioManager ThisAudioManager;
     public GameObject TestBox;
     public GameObject UIElements;
+    float weight = 0;
+    float x = 27;
+    float y = -50;
+    float z = -160;
+    Animator ThisAnim;
 
     [FMODUnity.EventRef]
     public string[] SFXEventNames;
@@ -39,8 +45,14 @@ public class Editor : MonoBehaviour
     {
         PauseMenu = new PausedState();
         PlayerAwake();
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 144;
         ThisAudioManager = new AudioManager(SFXEventNames, MusicEventNames, head);
+        ThisAnim = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+
     }
 
     void Update()
@@ -48,10 +60,64 @@ public class Editor : MonoBehaviour
 
     }
 
+    void OnAnimatorIK()
+    {
+
+        //Animator ThisAnim = this.GetObject().GetComponent<Animator>();
+        Vector3 worldpos = new Vector3(0.25f, 0, 1);
+
+        Vector2 mousePos = Input.mousePosition;
+        worldpos.x = mousePos.x;
+        worldpos.y = mousePos.y;
+        Vector3 newVec = Camera.main.ScreenToWorldPoint(worldpos);
+
+        ThisAnim.SetIKPosition(AvatarIKGoal.RightHand, newVec);
+        ThisAnim.SetIKPositionWeight(AvatarIKGoal.RightHand, weight);
+
+        ThisAnim.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.Euler(new Vector3(x, y, z) + ThisPlayer.GetRotationEuler()));
+        ThisAnim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+    }
+
     void LateUpdate()
     {
 
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            weight += 1 * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            weight -= 1 * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.Y))
+        {
+            x += 1 ;
+        }
+        if (Input.GetKey(KeyCode.U))
+        {
+            y += 1;
+        }
+        if (Input.GetKey(KeyCode.I))
+        {
+            z += 1;
+        }
 
+        if (Input.GetKey(KeyCode.H))
+        {
+            x -= 1;
+        }
+        if (Input.GetKey(KeyCode.J))
+        {
+            y -= 1;
+        }
+        if (Input.GetKey(KeyCode.K))
+        {
+            z -= 1;
+        }
+        if (Input.GetKey(KeyCode.P))
+        {
+            Debug.Log(weight);
+        }
         ThisPlayer.Update();
         hotbar.Update();
         MyCamera.SetActive(true);
@@ -61,52 +127,6 @@ public class Editor : MonoBehaviour
         HealthBar.transform.localScale = new Vector3(Data.x / 100, 1, 1);
         SanityBar.transform.localScale = new Vector3(Data.z / 100, 1, 1);
         ThisAudioManager.Update(100 - Data.z);
-
-
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            //float tempforward = Vector3.Angle(head.transform.forward, TestBox.transform.position - head.transform.position);
-            //Vector3 forup = new Vector3(TestBox.transform.position.x, 0, TestBox.transform.position.z);
-            //Vector3 forupdeduction = new Vector3(head.transform.position.x, head.transform.position.y, head.transform.position.z);
-            //float tempup = Vector3.Angle(head.transform.up, forup - forupdeduction);
-            //Debug.Log("Angle forward is: "+ tempforward);
-            //Debug.Log("Angle up is: " + tempup);
-
-            // Bit shift the index of the layer (8) to get a bit mask
-            
-
-            // This would cast rays only against colliders in layer 8.
-            // But instead we want to collide against everything except layer 8. The ~ operator does this, it inverts a bitmask.
-            
-
-            
-
-            // Does the ray intersect any objects excluding the player layer
-
-        }
-
-        
-
-        if(Vector3.Angle(head.transform.forward, TestBox.transform.position - head.transform.position) <= 45)
-        {
-            RaycastHit hit;
-            Vector3 Direction = ThisPlayer.GetObject().transform.position - TestBox.transform.position;
-            if (!Physics.Raycast(TestBox.transform.position, Direction, out hit,
-            Vector3.Distance(TestBox.transform.position, ThisPlayer.GetPosition()), layerMask))
-            {
-                Debug.Log("LOOKING AND CAN SEE");
-            }
-            else
-            {
-                Debug.Log("LOOKING AND CANT SEE");
-            }
-            
-        }
-        else
-        {
-            Debug.Log("NOT LOOKING");
-        }
-
 
 
 
@@ -138,7 +158,7 @@ public class Editor : MonoBehaviour
         layerMask = ~layerMask;
         input = new InputManager();
         hotbar = new PlayerInventory(defaultIcon, selectedIcon, emptyItem, SlotNumber);
-        ThisPlayer = new Player(gameObject, head, hotbar, false, input);
+        ThisPlayer = new Player(gameObject, head, hotbar, true, input, HandTarget);
         Player1Stats = new StatObserver(ThisPlayer);
         Player1Score = new ScoreObserver(ThisPlayer);
         /*FOR TUTORIAL:*/ //Player1.SetState(new TeachWalkState());

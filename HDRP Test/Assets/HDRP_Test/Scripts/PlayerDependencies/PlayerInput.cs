@@ -28,7 +28,8 @@ public class PlayerInput
 
 
     //For Walking
-    private float Speed = 6f;
+    private float Speed = 18f;
+    private float DefaultSpeed = 18.0f;
     private float StartIncrement = 10;
     private float StopIncrement = 5;
     private float VerticalVelocity = 0;
@@ -39,18 +40,18 @@ public class PlayerInput
 
     //For Jumping
     private float YVelocity = 0;
-    private float JumpVelocity = 5;
+    private float JumpVelocity = 10f;
     private float FallMultiplier = 1.2f;
     private bool IsJumping = false;
     private bool Adjusted = false;
     private int Jump = 0;
-    private float StaminaDeduction = 10.0f;
+    private float StaminaDeduction = 7.5f;
 
     public float JumpMult = 2.5f;
     public float lowJumpMult = 2f;
     //For Gravity
-    private Vector3 BaseGravityForce = new Vector3(0, -9.8f, 0);
-    private Vector3 AdjustedGravityForce = new Vector3(0, -9.8f, 0);
+    private Vector3 BaseGravityForce = new Vector3(0, -9.8f * 2.8f, 0);
+    private Vector3 AdjustedGravityForce = new Vector3(0, -9.8f * 2.8f, 0);
 
     //For Camera
     private float speedH = 2.0f;
@@ -61,6 +62,18 @@ public class PlayerInput
     private float pitch = 0.0f;
     Quaternion OldRot = Quaternion.Euler(new Vector3(0, 0, 0.0f));
 
+    public void SetWalkSpeed(float temp)
+    {
+        Speed = temp;
+    }
+    public float GetWalkSpeed()
+    {
+        return Speed;
+    }
+    public float GetDefaultSpeed()
+    {
+        return DefaultSpeed;
+    }
     Vector3 RotateCamera(PlayerState state)
     {
 
@@ -213,8 +226,9 @@ public class PlayerInput
 
 
 
-    public void Update(Stamina playerstam, PlayerState currentstate)
+    public void Update(Stamina playerstam, PlayerState currentstate, GameObject Handlocation)
     {
+        
         InventoryInput();
 
         int Vertical = 0;
@@ -278,9 +292,15 @@ public class PlayerInput
             _animator.SetBool("IsWalking", true);
 
         }
+        else if (Horizontal != 0 || Vertical != 0)
+        {
+            _animator.SetBool("IsWalking", true);
+
+        }
         else
         {
             _animator.SetBool("IsWalking", false);
+
         }
 
         Vector3 VerticalMovement = _Headtransform.forward * VerticalVelocity;
